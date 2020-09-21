@@ -1,0 +1,24 @@
+{% extends 'base/base_logeado.html' %}
+
+{% block content %}
+{% csrf_token %}
+<center>
+	<form method="post">
+    {% csrf_token %}
+    <h1>Nombre del producto</h1>
+    {{ form.nom_prod }}
+
+    <h1>Precio del producto (unidad)</h1>
+    {{ form.precio_prod }}
+
+    <h1>Stock del producto (Kg)</h1>
+    {{ form.stock_prod }}
+
+    <input type="text" name="usuarios_usuarios_id_user" class="form-control" required="" id="id_usuarios_usuarios_id_user" value="{{ request.user.id_user }}" style="display: none;">
+    <br>
+    <input type="submit" value="Submit">
+</form>
+</center>
+
+
+{% endblock %}

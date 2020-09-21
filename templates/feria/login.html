@@ -1,0 +1,56 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="divlogin">
+
+<center>
+	<h1 style="color: white;">INICIAR SESION</h1>
+</center>
+
+<center>
+
+<form method="post">
+{% csrf_token %}
+
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<div class="form-group" style="margin-top: 10px;">
+
+			<label for="username" style="color: white;">NOMBRE DE USUARIO O CORREO ELECTRONICO</label>
+			<input class="form-control" type="text" name="username">
+				
+		</div>
+	</div>
+</div>
+
+<div class="row" id="contra">
+	<div class="col-md-6 col-md-offset-3">
+		<div class="form-group">
+
+			<label for="password" style="color: white;">CONTRASEÑA</label>
+			<input class="form-control" type="password" name="password">
+				
+		</div>
+	</div>
+</div>
+
+<div class="row" id="botones">
+	<div class="col-md-6 col-md-offset-3">
+		<div class="form-group">
+
+			<a href="{% url 'registrarse' %}" class="btn btn-primary" id="botonreg">Registrarse</a>
+			<input class="btn btn-primary" type="submit" value="Ingresar" id="botonlog">
+				
+		</div>
+	</div>
+</div>
+
+</form>
+</center>
+
+{% endblock %}
+
+

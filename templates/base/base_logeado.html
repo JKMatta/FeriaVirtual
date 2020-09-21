@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+
+    {% block extrastatic %}
+    {% endblock %}
+
+    <link rel="stylesheet" href="{% static 'css/estilos2.css' %}">
+    <meta name="viewport" content="width=device-width">
+
+    {% block title %}
+
+    {% endblock%}
+
+</head>
+
+<body class="bodyuser">
+
+<header>
+    <input type="checkbox" id="btn-menu">
+    <label for="btn-menu"><img src="/static/img/menu.png" alt="" class="imagen-menu"></label>
+
+    <nav class="menu">
+        <ul>
+            <ul><li><a href="{% url 'sistema:index' %}"> INICIO</a></li></ul>
+            <ul><li><a href="{% url 'login' %}"> SALIR </a></li></ul>
+        </ul>
+    </nav>
+</header>
+
+
+
+
+{% block content %}
+
+
+
+
+{% endblock %}
+
+
+
+{% block footer %}
+
+
+{% endblock %}
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+
+</body>
+</html>

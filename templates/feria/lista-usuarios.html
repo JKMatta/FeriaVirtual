@@ -1,0 +1,117 @@
+{% extends 'base/base_logeado.html' %}
+
+
+
+
+{% block content %}
+
+<table class="table table-bordered" style="margin-left: 5%;margin-right: 5%; width: 90%;">
+	<thead>
+		<tr>
+			<td><center>Usuario</center></td>
+			<td><center>Nombre</center></td>
+			<td><center>Apellido</center></td>
+			<td><center>Rol</center></td>
+			<td><center>Contrato</center></td>
+			<td><center>Editar</center></td>
+		</tr>
+	</thead>
+
+	<tbody>
+
+
+<div align="center">
+	<h1> LISTA DE USUARIOS </h1>
+</div>
+<br>
+
+{% load static %}
+
+		{% if usuarios %}
+		{% for usuario in usuarios %}
+			{% if usuario.is_staff %}
+
+			{% else %}
+		<tr>
+			<td><center>{{ usuario.username }}</center></td>
+			<td><center>{{ usuario.first_name }}</center></td>
+			<td><center>{{ usuario.last_name }}</center></td>
+
+
+				{% if usuario.tipo_usuario == 'productor' %}
+					<td> 
+						<center>
+							<p>productor</p>
+						</center>
+					</td>
+				{% else %}
+					{% if usuario.tipo_usuario == 'interno' %}
+						<td> 
+							<center>
+								<p>Interno</p>
+							</center>
+						</td>
+					{% else %}
+						{% if usuario.tipo_usuario == 'externo' %}
+							<td> 
+								<center>
+									<p>Externo</p>
+								</center>
+							</td>
+						{% else %}
+							{% if usuario.tipo_usuario == 'consultor' %}
+								<td> 
+									<center>
+										<p>Consultor</p>
+									</center>
+								</td>
+							{% else %}
+								{% if usuario.tipo_usuario == 'transportista' %}
+									<td> 
+										<center>
+											<p>Transportista</p>
+										</center>
+									</td>
+								{% endif %}
+							{% endif %}
+						{% endif %}
+					{% endif %}
+				{% endif %}
+			
+		{% if usuario.is_active %}
+			<td> 
+				<center>
+					<p>Activo</p>
+				</center>
+			</td>
+		{% else %}
+			<td> 
+				<center>
+					<p>Cancelado</p>
+				</center>
+			</td>
+		{% endif %}
+
+
+		<td> 
+			<center>
+				<a class="btn btn-primary" href="{% url 'sistema:editar_usuario' usuario.id_user %}">Asignar</a>
+			</center>
+		</td>
+
+		</tr>
+
+		{% endif %}
+		{% endfor %}
+		{% else %}
+
+		<h1>No hay usuarios</h1>
+
+		{% endif %}
+
+	</tbody>
+
+</table>
+
+
+{% endblock %}

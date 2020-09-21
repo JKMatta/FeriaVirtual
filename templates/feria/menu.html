@@ -1,0 +1,41 @@
+{% extends 'base/base_logeado.html' %}
+
+{% block content %}
+
+{% if request.user.is_staff %}
+    <h1>Bienvenido, administrador {{ request.user.username }}</h1>
+	<h2>Administrar usuarios</h2>
+	<a href="{% url 'sistema:usuarios' %}" class="btn btn-primary" id="usuarios">Administrar</a>
+{% else %}
+	{% if request.user.tipo_usuario == 'productor' %}
+    	<h1>Bienvenido, productor {{ request.user.username }}</h1>
+    	<h2>Registrar productos</h2>
+		<a href="{% url 'sistema:regprod' %}" class="btn btn-primary" id="productos">Publicar</a>
+	{% else %}
+		{% if request.user.tipo_usuario == 'interno' %}
+		    <h1>Bienvenido, cliente interno {{ request.user.username }}</h1>
+		    <h2>Ver lista de productos</h2>
+			<a href="{% url 'sistema:listaprod' %}" class="btn btn-primary" id="productos">Revisar</a>
+		{% else %}
+	
+			{% if request.user.tipo_usuario == 'externo' %}
+			    <h1>Bienvenido, cliente externo {{ request.user.username }}</h1>
+			    <h2>Ver lista de productos</h2>
+				<a href="{% url 'sistema:listaprod' %}" class="btn btn-primary" id="productos">Revisar</a>
+			{% else %}
+	
+				{% if request.user.tipo_usuario == 'consultor' %}
+				    <h1>Bienvenido, consultor {{ request.user.username }}</h1>
+				{% else %}
+	
+					{% if request.user.tipo_usuario == 'transportista' %}
+					    <h1>Bienvenido, transportista {{ request.user.username }}</h1>
+					{% endif %}
+				{% endif %}
+			{% endif %}
+		{% endif %}
+	{% endif %}
+{% endif %}
+
+
+{% endblock %}

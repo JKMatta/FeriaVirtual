@@ -1,0 +1,38 @@
+{% extends 'base/base_logeado.html' %}
+
+
+
+
+{% block content %}
+<br>
+<center>
+
+		<h1 class="titulo">Detalles del usuario</h1>
+
+	<div class="container">
+		<form method="POST">
+			{% csrf_token %}
+			<h2>Correo</h2>
+			{{ form.email }}
+			<h2>Username</h2>
+			{{ form.username }}
+			<h2>Nombre</h2>
+			{{ form.first_name}}
+			<h2>Apellido</h2>
+			{{ form.last_name }}
+			<h2>Contrato</h2>
+			{{ form.is_active }}
+			<h2>Rol asignado</h2>
+			{{ form.tipo_usuario }}
+			<br>
+			<br>
+			<button type="submit">Guardar</button>
+		</form>
+	</div>
+
+</center>
+{% endblock %}
+
+
+
+
