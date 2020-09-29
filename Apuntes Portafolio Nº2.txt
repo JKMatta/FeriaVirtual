@@ -1,0 +1,54 @@
+Portafolio Clase Nº2 
+
+- archivo subido al portal 
+- plazo de entrega hoy 
+- la semana del 17, tienen que estar esas actividades listas
+- lo imporatante es que deberiamos tener muy claro cuales seran los 
+herramientas de desarrollo en las cuales que vamos utilizar 
+-un informe con todo lo solicitado y un rar con todo los artefactos
+- un informe
+- un archivo comprimido
+- un link al repositorio git 
+- hay que hacer un demo, de lo que llevo hasta ahora 
+- hay que hacer power point (presentacion)
+
+archivos al entregar
+
+- ppt 
+- informe
+- comprimir doc
+- diagrama
+- link git
+
+dudas 
+
+una es los reportes por cada rol y a que se refiere con el rol
+y que tipo de reportes 
+
+- en los reportes de cada rol, deber estar la informacion que interviene
+dentro de la venta realizada, ya que por ejemplo, al proveedor no le interesa
+saber cuanto combustible gasto el transportista
+
+los reportes tienen que ser por cada venta o algo mensual? ya que en el caso
+no especifica eso? 
+
+-la reporteria no se hace por cada venga se hace por dia, 
+por mes y por año
+
+profe, es conveniente que todos los usuarios esten registrados en una tabla, y que ahi se caracterizen por roles? 
+o cada tipo de usuario en una tabla diferente
+
+- normalmente se define por tabla usuario. 
+
+podríamos disponer diarios - semanales - mensuales, 
+cosa de q el usuario tenga a elección...
+
+- depende de la tecnologia que usemos, 
+ahora se usaria que esta hecha y no hacerla por ti mismo
+
+
+* hecharle la mirada una guia que esta en el AVA
+
+*Se crea un informe, se adjunta todo el material más e link de GitHub,
+hay q hacer un ppt pero solo para visual y hay q grabar una demo de lo obtenido hasta ahora
+
