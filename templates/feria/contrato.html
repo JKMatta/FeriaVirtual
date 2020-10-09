@@ -1,0 +1,28 @@
+{% extends 'base/base_logeado.html' %}
+
+
+
+{% block content %}
+<br>
+<center>
+
+		<h1 class="titulo" style="color: white;">Solicitar contrato</h1>
+<h2 style="color: white;">Proporciona tu informacion personal</h2>
+	<div class="container">
+		<form method="POST">
+			{% csrf_token %}
+			<input type="text" name="usuarios_usuarios_id_user" class="form-control" required="" id="id_usuarios_usuarios_id_user" value="{{ request.user.id_user }}" style="display: none;">
+			<h2 style="color: white;">Rut</h2>
+			{{ form.rut_person }}
+			<h2 style="color: white;">Telefono</h2>
+			{{ form.phone_contrat }}
+			<h2 style="color: white;">Las fechas estimadas para el contrato se generaran de forma automatica</h2>
+
+			<br>
+			<br>
+			<button type="submit">Solicitar</button>
+		</form>
+	</div>
+
+</center>
+{% endblock %}

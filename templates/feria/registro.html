@@ -1,0 +1,25 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<div class = "row">
+    <section class = "col-6 col-md-4 form-register">
+    	<form method="post">
+    		{% csrf_token %}
+	        <h4> Formulario de Registro </h4>
+	        <input class = "controls" type="text" name="first_name" id="nombres" placeholder="ingrese su nombre">
+	        <input class = "controls" type="text" name="last_name" id="apeliidos" placeholder="ingrese su apellido">
+	        <input class = "controls" type="text" name="username" id="usuarios" placeholder="ingrese su nombre de usuario">
+	        <input class = "controls" type="email" name="email" id="emails" placeholder="ingrese su correo electronico">
+	        <input class = "controls" type="password" name="password1" id="passwords" placeholder="ingrese su contraseña">
+	        <input class = "controls" type="password" name="password2" id="confirmarpass" placeholder="confirme su contraseña">
+	        <input class = "botons" type="submit" value="Registrar">
+	        <p><a href="{% url 'base:index' %}"> ¿Ya tengo Cuenta? </a> </p>
+	    </form>
+    </section>
+</div>
+
+
+{% endblock %}

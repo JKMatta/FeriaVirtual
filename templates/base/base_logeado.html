@@ -1,0 +1,62 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'img/logo.ico' %}" type="image/x-icon">
+    <title> Administrador - inicio </title>
+    <!-- CSS -->
+    <link rel = "stylesheet" type = "text/css" href = "{% static 'css/css-vistas.css' %}"/>
+    <link rel = "stylesheet" type = "text/css" href = "{% static 'css/bootstrap.css' %}"/>
+    <link rel = "stylesheet" type = "text/css" href = "{% static 'css/bootstrap.min.css' %}">
+
+    {% block extrastatic %}
+
+    {% endblock %}
+
+    {% block title %}
+
+    {% endblock%}
+
+</head>
+    <body data-spy="scroll" data-target=".navbar" data-offset="50">
+    <div class="container">
+        <header class="row">
+            <nav class="navbar navbar-expand-lg navbar-dark"> <!--bg-light-->
+                <a href="#"> <img src = "{% static 'img/logo-principal.png' %}" alt = "logo" class = "fotologo"/> 
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                  <div class="navbar-nav w-100 justify-content-center">
+                    <a class="nav-item nav-link active" href="{% url 'sistema:index' %}">Inicio</a>
+                    {% if not request.user.is_staff %}
+                    <a class="nav-item nav-link active" href="{% url 'sistema:mi-contrato' %}">Contrato</a>
+                    {% endif%}
+                    <a class="nav-item nav-link active" href="{% url 'login' %}">Salir</a>
+                  </div>
+                </div>
+            </nav>
+        </header>
+        
+    {% block content %}
+
+    {% endblock %}
+
+    </div>
+<!-- JavaScript-->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+
+
+{% block footer %}
+
+{% endblock %}
+
+</body>
+</html>

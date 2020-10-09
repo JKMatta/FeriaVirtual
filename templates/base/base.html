@@ -1,0 +1,56 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+
+    {% block extrastatic %}
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon">
+    <title> Feria Virtual - Registrarse </title>
+    <!-- CSS -->
+    <link rel = "stylesheet" type = "text/css" href = "{% static 'css/css-ini-re.css' %}"/>
+    <link rel = "stylesheet" type = "text/css" href = "{% static 'css/bootstrap.css' %}"/>
+    <link rel = "stylesheet" type = "text/css" href = "{% static 'css/bootstrap.min.css' %}">
+    {% endblock %}
+
+    <title>Index</title>
+
+</head>
+
+<body class="bodyindex">
+
+            <header class = "row">
+                <div class = "col-sm">
+                    <a href="#"> <img src = "{% static 'img/logo-principal.png' %}" alt = "logo" class = "fotologo"/> 
+                </div>
+            </header>
+  
+{% block content %}
+
+<div class="menu">
+
+    <br>
+<center>
+    <a href="{% url 'registrarse' %}" style="color: white; font-size: 20px;">REGISTRARSE</a><br>
+    <a href="{% url 'login' %}" style="color: white; font-size: 20px;">INICIAR SESION</a>
+</center>
+
+</div>
+
+{% endblock %}
+
+
+{% block footer %}
+
+{% endblock %}
+
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+{% extends 'base/base_logeado.html' %}
+
+{% block content %}
+
+<table class="table table-bordered" style="margin-left: 5%;margin-right: 5%; width: 90%;">
+	<thead>
+		<tr>
+			<td style="color: white;"><center>Nombre producto</center></td>
+			<td style="color: white;"><center>Precio producto</center></td>
+			<td style="color: white;"><center>Stock</center></td>
+			<td style="color: white;"><center>Vendedor</center></td>
+		</tr>
+	</thead>
+
+	<tbody>
+
+
+<div align="center">
+	<h1 style="color: white;"> LISTA DE PRODUCTOS</h1>
+</div>
+
+{% load static %}
+
+		{% if productos and usuarios %}
+		{% for producto in productos %}
+			
+		<tr>
+			<td style="color: white;"><center>{{ producto.nom_prod }}</center></td>
+			<td style="color: white;"><center>{{ producto.precio_prod }}</center></td>
+			<td style="color: white;"><center>{{ producto.stock_prod }}</center></td>
+
+			<td style="color: white;"><center>{{ producto.usuarios_usuarios_id_user.username }}</center></td>
+
+		</tr>
+
+		{% endfor %}
+		{% else %}
+
+		<h1>No hay productos</h1>
+
+		{% endif %}
+
+	</tbody>
+
+</table>
+
+
+{% endblock %}

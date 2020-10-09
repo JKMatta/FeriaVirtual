@@ -1,0 +1,25 @@
+{% extends 'base/base_logeado.html' %}
+
+{% block content %}
+{% csrf_token %}
+<center>
+    <h1 style="color: white;">Agregar productos</h1>
+	<form method="post">
+    {% csrf_token %}
+    <h2 style="color: white;">Nombre del producto</h2>
+    {{ form.nom_prod }}
+
+    <h2 style="color: white;">Precio del producto (unidad)</h2>
+    {{ form.precio_prod }}
+
+    <h2 style="color: white;">Stock del producto (Kg)</h2>
+    {{ form.stock_prod }}
+
+    <input type="text" name="usuarios_usuarios_id_user" class="form-control" required="" id="id_usuarios_usuarios_id_user" value="{{ request.user.id_user }}" style="display: none;">
+    <br>
+    <input type="submit" value="Agregar">
+</form>
+</center>
+
+
+{% endblock %}

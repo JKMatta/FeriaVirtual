@@ -1,0 +1,16 @@
+body {
+	background-color: #E8E8E8;
+	background-image: url("/static/img/fondo.jpg");
+}
+
+.logo {
+	margin-top: 20px;
+	border-style: solid;
+	width: 250px;
+	border-width: 10px;
+	border-color: #ffffff;
+	color: #00c5e4;
+}
+.logo h1 {
+	font-size: 40px;
+}

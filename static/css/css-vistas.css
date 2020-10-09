@@ -1,0 +1,91 @@
+* {
+    margin: 1px;
+    padding: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+body {
+    background: url(../img/login.jpg);
+    height: 100vh;
+    margin: 8px;
+    background-size: cover;
+    background-position: center;
+    margin: auto;
+}
+
+    /*      Vista Productores     */
+/*  header  */
+
+header {
+    background: rgba(105, 105, 105, 0.6);
+    margin: auto;
+    display: inline-block;
+    padding: 10px;
+    text-align: left;
+    border-radius: 80px;
+}
+
+/*  mrnu opciones izquierda  */
+ul#menu li{
+
+    display: inline;
+    color: white;
+    font: arial;
+    margin: 0px;
+    padding: 0px;
+    font-family: arial;    
+}
+
+a:link, a:visited {
+    /*background-color: #85D2B7;*/
+    color: white;
+    padding: 0px;
+    text-align: center; 
+    text-decoration: none;
+    display: inline-block;
+}
+
+/*  titulo procesos de venta disponibles   */
+.opciones {
+    background: rgba(105, 105, 105, 0.5);
+    width: 300px;
+    height: 500px;
+    /*padding: 3px;*/
+    border-radius: 20px;
+}
+
+/*  titulos dentro del cuadro de procesos de venta  */
+.opciones h4 {
+    color: black;
+    font-family: sans-serif;
+    font-size: x-large;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.opciones h5 {
+    color: black;
+    font-family: sans-serif;
+    font-size: x-large;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 5px;
+    background-color: rgba(155, 247, 234,0.5);
+    border-radius: 100px;
+}
+
+.opciones a:hover {
+    color: #9FBFDF ;
+    text-decoration: underline;
+}
+
+/* Vista Productores - nav */
+#vist-prod {
+    font-weight: bold;
+    margin-left: 10px;
+    /*background-color: rgba(105, 141, 176, 0.5);
+    border-radius: 20px;*/
+    padding: 20px;
+}

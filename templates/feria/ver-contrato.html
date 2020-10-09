@@ -1,0 +1,49 @@
+{% extends 'base/base_logeado.html' %}
+
+{% block content %}
+
+<tbody>
+
+<div align="center">
+	<h1 style="color: white;"> MI CONTRATO </h1>
+	<h2 style="color: white;">Esta es la informacion que has proporcionado</h2>
+</div>
+
+
+	{% if contra %}
+		{% for contrato in contra %}
+
+		<center>
+			<div>
+				<tr>
+					<td ><center><h3 style="color: white;">Rut: {{ contrato.rut_person }} </h3></center></td>
+					<td ><center><h3 style="color: white;">Telefono: {{ contrato.phone_contrat }}</h3></center></td>
+					<td ><center><h3 style="color: white;">Emision: {{ contrato.emision_contrat }}</h3></center></td>
+					<td ><center><h3 style="color: white;">Expiracion: {{ contrato.fin_contrat }}</h3></center></td>
+					{% if contrato.estado == 0 %}
+					<td ><center><h3 style="color: white;">Estado: En proceso</h3></center></td>
+					{% else %}
+					<td ><center><h3 style="color: white;">Estado: Aceptado</h3></center></td>
+					{% endif %}
+					
+					<br>
+					<br>
+				</tr>
+				</div>
+		</center>
+
+
+
+		{% endfor %}
+	{% else %}
+
+		<h1 style="margin-left: 5%;color: white;">No tienes contrato</h1>
+		<a class="btn btn-primary" href="{% url 'sistema:regcontr' %}" style="margin-left: 5%;">Pedir contrato</a>
+
+	{% endif %}
+
+		
+
+</tbody>
+
+{% endblock %}

@@ -1,0 +1,151 @@
+* {
+    margin: 1px;
+    padding: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+body {
+    background: url(../img/login.jpg);
+    height: 100vh;
+    margin: 8px;
+    background-size: cover;
+    background-position: center;
+    margin: auto;
+}
+
+body::-webkit-scrollbar {
+    width: 0.25rem;
+}
+
+/*       Inicio y foto header          */
+header {
+    background: rgba(105, 105, 105, 0.6);
+    margin: auto;
+    display: inline-block;
+    padding: 10px;
+    text-align: center;
+    border-radius: 80px;
+}
+
+
+/*  Iniciar Sesion  */
+
+
+.form-iniciar {
+    width: 400px;
+    background: rgba(105, 105, 105, 0.5);
+    padding: 30px;
+    margin: auto;
+    margin-top: 50px;
+    border-radius: 4px;
+    font-family: 'calibri';
+    color: white;
+    box-shadow: 7px 13px 37px #000;
+}
+    
+.form-iniciar .controls {
+    width: 100%;
+    background: #24303c;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    border: 1px solid white;
+    font-family: 'calibri';
+    font-size: 18px;
+    color: white;
+}
+    
+.form-iniciar h4 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: center;
+    
+}
+    
+.form-iniciar p {
+    height: 40px;
+    text-align: center;
+    font-size: 18px;
+}
+    
+.form-iniciar a {
+    color: white;
+    text-decoration: none;
+}
+    
+.form-iniciar a:hover {
+    color: white;
+    text-decoration: underline;
+}
+    
+.form-iniciar .botons {
+    width: 100%;
+    background: #1f53c5;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+    color: white;
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+/*  Registrarse  */
+
+.form-register {
+    width: 400px;
+    background: rgba(105, 105, 105, 0.5);
+    padding: 5px;
+    margin: auto;
+    margin-top: 10px;
+    border-radius: 4px;
+    font-family: 'calibri';
+    color: white;
+    box-shadow: 7px 13px 37px #000;
+}
+
+.form-register h4 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-register .controls {
+    width: 100%;
+    background: #24303c;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    border: 1px solid white;
+    font-family: 'calibri';
+    font-size: 18px;
+    color: white;
+}
+
+.form-register p {
+    height: 20px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.form-register a {
+    color: white;
+    text-decoration: none;
+}
+
+.form-register a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.form-register .botons {
+    width: 100%;
+    background: #1f53c5;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    color: white;
+    margin: 10px 0;
+    font-size: 16px;
+}

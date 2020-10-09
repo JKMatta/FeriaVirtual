@@ -1,0 +1,26 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+<div class = "row">
+    <section class="col-6 col-md-4 form-iniciar">
+    	<form method="post">
+    		{% csrf_token %}
+	        <h4> Iniciar Sesión </h4>
+	        <input class = "controls" type="text" name="username" id="user" placeholder="ingrese su usuario">
+	        <input class = "controls" type="password" name="password" id="pass" placeholder="ingrese su contraseña">
+	        <input class = "botons" type="submit" value="Iniciar Sesión">
+	        <p><a href="{% url 'registrarse' %}"> Deseo registrarme </a></p>
+	        <p><a href="#"> Olvide mi Contraseña </a></p>
+        </form>
+    </section>
+</div>
+
+
+
+{% endblock %}
+
+

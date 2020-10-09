@@ -1,0 +1,100 @@
+{% extends 'base/base_logeado.html' %}
+
+{% block content %}
+
+
+{% if request.user.is_staff %}
+
+    <h1 style="color: white;">Bienvenido, administrador {{ request.user.username }}</h1>
+	<div class="row">
+        <aside class = ".col-6 .col-md-4 opciones">
+            <h4> Procesos de Venta Disponibles </h4>
+            <nav id="vist-prod">
+                <ul>
+                    <li> <a href="{% url 'sistema:listaprod' %}"> Lista </a> </li>
+                    <li> <a href=""> Crear Proceso de Venta </a> </li>
+                </ul>
+            </nav>
+            <h5> Usuarios </h5>
+            <nav id = "vist-prod">
+                <ul>
+                    <li> <a href="{% url 'sistema:usuarios' %}"> Ver / Modificar / Eliminar </a> </li>
+                </ul>
+            </nav>
+            <h5> Resumen de Ventas </h5>
+            <nav id = "vist-prod">
+                <ul>
+                    <li> <a href=""> Estadisticas </a> </li>
+                </ul>
+            </nav>
+        </aside>
+    </div>  
+
+{% else %}
+
+	{% if request.user.tipo_usuario == 'productor' %}
+
+	<h1 style="color: white;">Bienvenido, productor {{ request.user.username }}</h1>
+	<div class="row">
+            <aside class = ".col-6 .col-md-4 opciones">
+                <h4> Procesos de Venta Disponibles </h4>
+                <br>
+                <h5> Procesos de venta </h5>
+                <nav id="vist-prod">
+                    <ul>
+                        <li> <a href="{% url 'sistema:regprod' %}"> Agregar Productos </a> </li>
+                        <li> <a href=""> Ver productos </a> </li>
+                        <li> <a href=""> Modificar Productos </a> </li>
+                        <li> <a href=""> Eliminar productos </a> </li>
+                    </ul>
+                </nav>
+                <h5> Ganancias </h5>
+                <nav id = "vist-prod">
+                    <ul>
+                        <li> <a href=""> Ganancias globales </a> </li>
+                    </ul>
+                </nav>
+            </aside>
+        </div>  
+
+	{% else %}
+
+		{% if request.user.tipo_usuario == 'interno' %}
+
+		    <h1 style="color: white;">Bienvenido, cliente interno {{ request.user.username }}</h1>
+		    <h2 style="color: white;">Ver lista de productos</h2>
+			<a href="{% url 'sistema:listaprod' %}" class="btn btn-primary" id="productos">Revisar</a>
+
+		{% else %}
+	
+			{% if request.user.tipo_usuario == 'externo' %}
+
+			    <h1 style="color: white;">Bienvenido, cliente externo {{ request.user.username }}</h1>
+			    <h2 style="color: white;">Ver lista de productos</h2>
+				<a href="{% url 'sistema:listaprod' %}" class="btn btn-primary" id="productos">Revisar</a>
+
+			{% else %}
+	
+				{% if request.user.tipo_usuario == 'consultor' %}
+
+				    <h1 style="color: white;">Bienvenido, consultor {{ request.user.username }}</h1>
+
+				{% else %}
+	
+					{% if request.user.tipo_usuario == 'transportista' %}
+
+					    <h1 style="color: white;">Bienvenido, transportista {{ request.user.username }}</h1>
+					    <h2 style="color: white;">Publicar mis transportes</h2>
+					    <a href="" class="btn btn-primary" id="productos">Transportes</a>
+
+					{% endif %}
+				{% endif %}
+			{% endif %}
+		{% endif %}
+	{% endif %}
+{% endif %}
+
+
+{% endblock %}
+
+
