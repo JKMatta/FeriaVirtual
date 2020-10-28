@@ -1,0 +1,8 @@
+CREATE OR REPLACE PROCEDURE SP_LISTAR_PRODUCTOS (productos out SYS_RECURSOR)
+IS
+
+BEGIN
+
+    OPEN productos FOR SELECT id_prod, nom_prod, precio_prod, desc_prod, stock_prod FROM usuarios_usuarios;
+
+END;

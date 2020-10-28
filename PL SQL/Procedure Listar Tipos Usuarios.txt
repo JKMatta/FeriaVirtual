@@ -1,0 +1,8 @@
+CREATE OR REPLACE PROCEDURE SP_LISTAR_TYPE_USERS (tipos out SYS_RECURSOR)
+IS
+
+BEGIN
+
+    OPEN tipos FOR SELECT tipo_usuario FROM usuarios_usuarios;
+
+END;
