@@ -2,48 +2,99 @@
 
 {% block content %}
 
-<tbody>
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 
-<div align="center">
-	<h1 style="color: white;"> MI CONTRATO </h1>
-	<h2 style="color: white;">Esta es la informacion que has proporcionado</h2>
-</div>
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#">
+                    <em class="fa fa-home"></em>
+                </a></li>
+            <li class="active">Contrato</li>
+        </ol>
+    </div>
+    <!--/.row-->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Informacion de contrato</h1>
+        </div>
+    </div>
+    <!--/.row-->
+    <div class="panel panel-default">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="tab1">
+                    	<table class="table table-bordered">
+						{% if contra %}
+							{% for contrato in contra %}
+							    <div class="col-md-3">
+					                <div class="row">
+					                    <h4 style="padding-left: 3%; margin: 0%;">Rut</h4>
+					                    <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+					                    	<input class="form-control" type="text" name="rut_person" value="{{ contrato.rut_person }}" maxlength="200" required="" id="id_descrip" disabled>
+					                    </div>
+					                </div>
+					            </div>
+					            <div class="col-md-3">
+					                <div class="row">
+					                    <h4 style="padding-left: 3%; margin: 0%;">Telefono</h4>
+					                    <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+					                    	<input class="form-control" type="text" name="phone_contrat" value="{{ contrato.phone_contrat }}" maxlength="200" required="" id="id_phone_contrat" disabled>
+					                    </div>
+					                </div>
+					            </div>
+					            <div class="col-md-3">
+					                <div class="row">
+					                    <h4 style="padding-left: 3%; margin: 0%;">Fecha emitida</h4>
+					                    <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+					                    	<input class="form-control" type="text" name="emision_contrat" value="{{ contrato.emision_contrat }}" maxlength="200" required="" id="id_emision_contrat" disabled>
+					                    </div>
+					                </div>
+					            </div>
+					            <div class="col-md-3">
+					                <div class="row">
+					                    <h4 style="padding-left: 3%; margin: 0%;">Fin del contrato</h4>
+					                    <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+					                    	<input class="form-control" type="text" name="fin_contrat" value="{{ contrato.fin_contrat }}" maxlength="200" required="" id="id_fin_contrat" disabled>
+					                    </div>
+					                </div>
+					            </div>
+					            {% if contrato.estado == 0 %}
+					            <div class="col-md-3">
+					                <div class="row">
+					                    <h4 style="padding-left: 3%; margin: 0%;">Estado</h4>
+					                    <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+					                    	<input class="form-control" type="text" name="estado" value="En revision" maxlength="200" required="" id="id_estado" disabled>
+					                    </div>
+					                </div>
+					            </div>
+								{% else %}
+					            <div class="col-md-3">
+					                <div class="row">
+					                    <h4 style="padding-left: 3%; margin: 0%;">Estado</h4>
+					                    <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+					                    	<input class="form-control" type="text" name="estado" value="Aceptado" maxlength="200" required="" id="id_estado" disabled>
+					                    </div>
+					                </div>
+					            </div>
+								{% endif %}
 
+							</center>
+							{% endfor %}
+						{% else %}
 
-	{% if contra %}
-		{% for contrato in contra %}
+							<h1 style="margin-left: 5%;">Solicitar contrato</h1>
+							<a class="btn btn-primary" href="{% url 'sistema:regcontr' %}" style="margin-left: 5%;">Pedir contrato</a>
 
-		<center>
-			<div>
-				<tr>
-					<td ><center><h3 style="color: white;">Rut: {{ contrato.rut_person }} </h3></center></td>
-					<td ><center><h3 style="color: white;">Telefono: {{ contrato.phone_contrat }}</h3></center></td>
-					<td ><center><h3 style="color: white;">Emision: {{ contrato.emision_contrat }}</h3></center></td>
-					<td ><center><h3 style="color: white;">Expiracion: {{ contrato.fin_contrat }}</h3></center></td>
-					{% if contrato.estado == 0 %}
-					<td ><center><h3 style="color: white;">Estado: En proceso</h3></center></td>
-					{% else %}
-					<td ><center><h3 style="color: white;">Estado: Aceptado</h3></center></td>
-					{% endif %}
-					
-					<br>
-					<br>
-				</tr>
-				</div>
-		</center>
-
-
-
-		{% endfor %}
-	{% else %}
-
-		<h1 style="margin-left: 5%;color: white;">No tienes contrato</h1>
-		<a class="btn btn-primary" href="{% url 'sistema:regcontr' %}" style="margin-left: 5%;">Pedir contrato</a>
-
-	{% endif %}
-
-		
-
-</tbody>
+						{% endif %}
+                	</div>
+                </div>
+            </div>
+        </div>
+        	<!--/.panel-->
+    </div>
+            <!--/.col-->
+</div>   
+    	<!--/.main-->
 
 {% endblock %}

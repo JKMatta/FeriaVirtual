@@ -1,0 +1,160 @@
+{% extends 'base/base_logeado.html' %}
+
+
+
+
+{% block content %}
+
+
+
+<form method="POST">
+	{% csrf_token %}
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="#">
+						<em class="fa fa-home"></em>
+					</a></li>
+				<li class="active">Oferta</li>
+			</ol>
+		</div>
+		<!--/.row-->
+
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">Oferta recibida <button type="submit" class="btn btn-lg btn-success">Enviar respuesta</button></h1>
+			</div>
+		</div>
+        <!--/.row-->
+        <div class="panel panel-default">
+            <div class="panel-heading"><h5>Mi pedido</h5></div>
+            <div class="row" style="padding: 1%; margin-left: 1%; margin-right: 1%;">
+                <div class="col-md-3">
+                    <div class="row">
+                        <h4 style="padding-left: 3%; margin: 0%;">Tipo de producto</h4>
+                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+                            <input class="form-control" value="{{ form.tipo.value }}" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <h4 style="padding-left: 3%; margin: 0%;">Fecha</h4>
+                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+                            <input class="form-control" value="{{ form.fecha.value }}" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <h4 style="padding-left: 3%; margin: 0%;">Descripcion</h4>
+                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+                            <input class="form-control" value="{{ form.descrip.value }}" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading"><h5>Oferta de venta</h5></div>
+            <div class="row" style="padding: 1%; margin-left: 1%; margin-right: 1%;">
+                <div class="col-md-3">
+                    <div class="row">
+                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+                            {% if productos %}
+							<select class="form-control" name="productos_id_prod" id="id_productos_id_prod">
+							  	<option value="">Buscar nueva oferta</option>
+							  	{% for producto in productos %}
+								{% if form.productos_id_prod.value == producto.id_prod %}
+							  	<option value="{{ producto.id_prod }}" selected="">{{ producto.usuarios_usuarios_id_user.username }} te ha ofrecido: {{ producto.nom_prod }} a ${{ producto.precio_prod}}/Kg</option>
+							  	{% endif %}
+								{% endfor %}
+							{% else %}
+								<h1>No hay ofertas</h1>
+							{% endif %}
+							</select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+							<h5>Aceptar oferta: {{ form.estado_productor }}</h5	>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="panel panel-default">
+            <div class="panel-heading"><h5>Datos del Productor</h5></div>
+            {% if productos %}
+			{% for producto in productos %}
+			{% if form.productos_id_prod.value == producto.id_prod %}
+			  	
+            <div class="row" style="padding: 1%;">
+                <div class="col-lg-6">
+                    <div class="row">
+                        <h4 style="padding-left: 3%; margin: 0%;">Nombre Completo</h4>
+                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+                            <input class="form-control" value="{{ producto.usuarios_usuarios_id_user.first_name }}" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <h4 style="padding-left: 3%; margin: 0%;">ID Usuario</h4>
+                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+                            <input class="form-control" value="#{{ producto.usuarios_usuarios_id_user.id_user }}" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding: 1%;">
+                <div class="col-lg-6">
+                    <div class="row">
+                        <h4 style="padding-left: 3%; margin: 0%;">Correo electrónico</h4>
+                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+                            <input class="form-control" value="{{ producto.usuarios_usuarios_id_user.email }}" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <h4 style="padding-left: 3%; margin: 0%;">Celular</h4>
+                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+                            <input class="form-control" value="+56 9 7328 3641" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding: 1%;">
+                <div class="col-lg-6">
+                    <div class="row">
+                        <h4 style="padding-left: 3%; margin: 0%;">Fecha de Contrato</h4>
+                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+                            <input class="form-control" value="25 Septiembre del 2020" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: none;">
+            {{ form.tipo }}
+			{{ form.fecha }}
+			{{ form.descrip}}
+            </div>
+
+
+
+			{% endif %}
+            {% endfor %}
+			{% else %}
+				<h1>No hay ofertas</h1>
+			{% endif %}
+        </div>
+</div>
+</form>
+{% endblock %}
+

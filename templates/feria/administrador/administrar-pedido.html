@@ -1,0 +1,91 @@
+{% extends 'base/base_logeado.html' %}
+
+
+
+
+{% block content %}
+
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="#">
+                        <em class="fa fa-home"></em>
+                    </a></li>
+                <li class="active">Solicitudes</li>
+            </ol>
+        </div>
+        <!--/.row-->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Solicitud del cliente</h1>
+            </div>
+        </div>
+        <!--/.row-->
+        <div class="panel panel-default">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab1">
+							<table class="table table-bordered">
+							<br>
+							<center>	
+								<div class="container">
+									<form method="POST">
+										{% csrf_token %}
+									    <div class="col-md-3">
+							                <div class="row">
+							                    <h4 style="padding-left: 3%; margin: 0%;">Tipo de producto</h4>
+							                    <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+							                    	<input class="form-control" type="text" name="tipo" value="{{ form.tipo.value }}" maxlength="200" required="" id="id_tipo" disabled>
+							                    </div>
+							                </div>
+							            </div>
+							            <div class="col-md-3">
+							                <div class="row">
+							                    <h4 style="padding-left: 3%; margin: 0%;">Fecha solicitada</h4>
+							                    <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+							                    	<input class="form-control" type="text" name="fecha" value="{{ form.fecha.value }}" required="" id="id_fecha" disabled>
+							                    </div>
+							                </div>
+							            </div>
+							            <div class="col-md-3">
+							                <div class="row">
+							                    <h4 style="padding-left: 3%; margin: 0%;">Descripcion</h4>
+							                    <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+							                    	<input class="form-control" type="text" name="descrip" value="{{ form.descrip.value }}" maxlength="200" required="" id="id_descrip" disabled>
+							                    </div>
+							                </div>
+							            </div>
+							            <div class="col-md-3">
+							                <div class="row">
+							                    <h4 style="padding-left: 3%; margin: 0%;">Aprobar</h4>
+							                    <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+							                    	{{ form.estado_admin }}
+							                    </div>
+							                </div>
+							            </div>
+
+							            <div style="display: none;">
+							            {{ form.tipo }}	
+							            {{ form.fecha }}
+							            {{ form.descrip }}
+							            </div>
+
+							            
+										<br>
+										<button class="btn btn-primary" type="submit">Guardar</button>
+									</form>
+								</div>
+							</center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            	<!--/.panel-->
+        </div>
+            <!--/.col-->
+    </div>   
+    	<!--/.main-->
+{% endblock %}

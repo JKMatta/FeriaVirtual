@@ -3,26 +3,56 @@
 
 
 {% block content %}
-<br>
-<center>
 
-		<h1 class="titulo" style="color: white;">Solicitar contrato</h1>
-<h2 style="color: white;">Proporciona tu informacion personal</h2>
-	<div class="container">
-		<form method="POST">
-			{% csrf_token %}
-			<input type="text" name="usuarios_usuarios_id_user" class="form-control" required="" id="id_usuarios_usuarios_id_user" value="{{ request.user.id_user }}" style="display: none;">
-			<h2 style="color: white;">Rut</h2>
-			{{ form.rut_person }}
-			<h2 style="color: white;">Telefono</h2>
-			{{ form.phone_contrat }}
-			<h2 style="color: white;">Las fechas estimadas para el contrato se generaran de forma automatica</h2>
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 
-			<br>
-			<br>
-			<button type="submit">Solicitar</button>
-		</form>
-	</div>
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#">
+                    <em class="fa fa-home"></em>
+                </a></li>
+            <li class="active">Contrato</li>
+        </ol>
+    </div>
+    <!--/.row-->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Solicitar contrato</h1>
+        </div>
+    </div>
+    <!--/.row-->
+    <div class="panel panel-default">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="tab1">
+                    	<table class="table table-bordered">
+							<center>
+							<h2>Proporciona tu informacion personal</h2>
+								<div class="container">
+									<form method="POST">
+										{% csrf_token %}
+										<input type="text" name="usuarios_usuarios_id_user" class="form-control" required="" id="id_usuarios_usuarios_id_user" value="{{ request.user.id_user }}" style="display: none;">
+										<h2>Rut</h2>
+										{{ form.rut_person }}
+										<h2>Telefono</h2>
+										{{ form.phone_contrat }}
+										<h3>(Las fechas estimadas para el contrato se generaran de forma automatica)</h3>
 
-</center>
+										<br>
+										<br>
+										<button class="btn btn-primary" type="submit">Solicitar</button>
+									</form>
+								</div>
+
+							</center>
+                	</div>
+                </div>
+            </div>
+        </div>
+        	<!--/.panel-->
+    </div>
+            <!--/.col-->
+</div>   
+    	<!--/.main-->
 {% endblock %}

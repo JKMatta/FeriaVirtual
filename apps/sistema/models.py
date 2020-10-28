@@ -9,15 +9,14 @@ from django.db import models
 import _datetime
 from dateutil.relativedelta import relativedelta
 
-
 class Contratos(models.Model):
     id_contrat = models.AutoField(primary_key=True)
     usuarios_usuarios_id_user = models.ForeignKey('UsuariosUsuarios', models.DO_NOTHING, db_column='usuarios_usuarios_id_user')
     rut_person = models.CharField(max_length=20)
     phone_contrat = models.IntegerField()
-    emision_contrat = models.DateField(default=_datetime.date.today(), blank=True)
-    fin_contrat = models.DateField(default=_datetime.date.today() + relativedelta(years=1), blank = True)
-    estado = models.BooleanField(default=False)
+    emision_contrat = models.DateField(default=_datetime.date.today(),blank=True)
+    fin_contrat = models.DateField(default=_datetime.date.today() + relativedelta(years = 1), blank = True)
+    estado = models.BooleanField(default = False)
 
     class Meta:
         managed = False
@@ -26,7 +25,7 @@ class Contratos(models.Model):
 
 class DetallCompra(models.Model):
     id_detall = models.IntegerField(primary_key=True)
-    proces_venta_id_venta = models.ForeignKey('ProcesVenta', models.DO_NOTHING, db_column='proces_venta_id_venta')
+    proces_venta_id_proc_venta = models.ForeignKey('ProcesVenta', models.DO_NOTHING, db_column='proces_venta_id_proc_venta')
     fecha_detall = models.DateField()
     nom_producto = models.CharField(max_length=15)
     cost_producto = models.IntegerField()
@@ -67,19 +66,33 @@ class DirecLocal(models.Model):
 
 
 class Pedido(models.Model):
-    id_pedido = models.IntegerField(primary_key=True)
-    nom_prod_pedido = models.CharField(max_length=20)
-    cant_prod = models.IntegerField()
+    id_ped = models.AutoField(primary_key=True)
+    tipo = models.CharField(max_length=200)
+    fecha = models.DateField()
+    descrip = models.CharField(max_length=200)
     usuarios_usuarios_id_user = models.ForeignKey('UsuariosUsuarios', models.DO_NOTHING, db_column='usuarios_usuarios_id_user')
+    productos_id_prod = models.ForeignKey('Productos', models.DO_NOTHING, db_column='productos_id_prod', blank=True, null=True)
+    estado_admin = models.BooleanField(default = False)
+    estado_productor = models.BooleanField(default = False)
 
     class Meta:
         managed = False
         db_table = 'pedido'
 
 
+class ProcesPedido(models.Model):
+    id_proc_pedido = models.AutoField(primary_key=True)
+    transporte_id_trans = models.ForeignKey('Transporte', models.DO_NOTHING, db_column='transporte_id_trans')
+    pedido_id_ped = models.ForeignKey(Pedido, models.DO_NOTHING, db_column='pedido_id_ped')
+    estado_proceso = models.BooleanField(default = False)
+    class Meta:
+        managed = False
+        db_table = 'proces_pedido'
+
+
 class ProcesVenta(models.Model):
-    id_venta = models.IntegerField(primary_key=True)
-    usuarios_usuarios_id_user = models.ForeignKey('UsuariosUsuarios', models.DO_NOTHING, db_column='usuarios_usuarios_id_user')
+    id_proc_venta = models.IntegerField(primary_key=True)
+    proces_pedido_id_proc_pedido = models.ForeignKey(ProcesPedido, models.DO_NOTHING, db_column='proces_pedido_id_proc_pedido')
 
     class Meta:
         managed = False
@@ -90,8 +103,8 @@ class Productos(models.Model):
     id_prod = models.AutoField(primary_key=True)
     nom_prod = models.CharField(max_length=20)
     precio_prod = models.IntegerField()
+    desc_prod = models.CharField(max_length=200)
     stock_prod = models.IntegerField()
-    transporte_id_trans = models.ForeignKey('Transporte', models.DO_NOTHING,null=True,blank=True, db_column='transporte_id_trans')
     usuarios_usuarios_id_user = models.ForeignKey('UsuariosUsuarios', models.DO_NOTHING, db_column='usuarios_usuarios_id_user')
 
     class Meta:
@@ -115,7 +128,7 @@ class ReportVenta(models.Model):
     prod_venta = models.CharField(max_length=20)
     cant_venta = models.IntegerField()
     total_venta = models.IntegerField()
-    usuarios_usuarios_id_user = models.ForeignKey('UsuariosUsuarios', models.DO_NOTHING, db_column='usuarios_usuarios_id_user')
+    proces_venta_id_proc_venta = models.ForeignKey(ProcesVenta, models.DO_NOTHING, db_column='proces_venta_id_proc_venta')
 
     class Meta:
         managed = False
@@ -128,73 +141,38 @@ class Reportes(models.Model):
     tip_report = models.CharField(max_length=15)
     user_report = models.CharField(max_length=15)
     descrip_report = models.CharField(max_length=30)
+    usuarios_usuarios_id_user = models.ForeignKey('UsuariosUsuarios', models.DO_NOTHING, db_column='usuarios_usuarios_id_user')
 
     class Meta:
         managed = False
         db_table = 'reportes'
 
 
-class SeguiProd(models.Model):
-    productos_id_prod = models.ForeignKey(Productos, models.DO_NOTHING, db_column='productos_id_prod')
-    est_segui = models.CharField(max_length=15)
-    seguimiento_est_seguimiento = models.ForeignKey('Seguimiento', models.DO_NOTHING, db_column='seguimiento_est_seguimiento')
-
-    class Meta:
-        managed = False
-        db_table = 'segui_prod'
-
-
 class Seguimiento(models.Model):
-    est_seguimiento = models.CharField(primary_key=True, max_length=20)
-    usuarios_usuarios_id_user = models.ForeignKey('UsuariosUsuarios', models.DO_NOTHING, db_column='usuarios_usuarios_id_user')
-    pedido_id_pedido = models.ForeignKey(Pedido, models.DO_NOTHING, db_column='pedido_id_pedido')
+    id_seguimiento = models.AutoField(primary_key=True)
+    estados = (('preparando','preparando productos'),('despacho','productos despachados'),
+        ('recepcionados','recepcionados por el transportista'),('viaje','en camino'),('completado','seguimiento finalizado'))
+    est_seguimiento = models.CharField(max_length=50,choices=estados,default='preparando')
+    pedido_id_ped = models.ForeignKey(Pedido, models.DO_NOTHING, db_column='pedido_id_ped')
+    proces_pedido_id_proc_pedido = models.ForeignKey(ProcesPedido, models.DO_NOTHING, db_column='proces_pedido_id_proc_pedido')
 
     class Meta:
         managed = False
         db_table = 'seguimiento'
 
 
-class SubaTrans(models.Model):
-    subastas_id_sub = models.ForeignKey('Subastas', models.DO_NOTHING, db_column='subastas_id_sub')
-    usuarios_usuarios_id_user = models.ForeignKey('UsuariosUsuarios', models.DO_NOTHING, db_column='usuarios_usuarios_id_user')
-
-    class Meta:
-        managed = False
-        db_table = 'suba_trans'
-
-
-class Subastas(models.Model):
-    id_sub = models.IntegerField(primary_key=True)
-    min_postor = models.IntegerField()
-    usuarios_usuarios_id_user = models.ForeignKey('UsuariosUsuarios', models.DO_NOTHING, db_column='usuarios_usuarios_id_user')
-
-    class Meta:
-        managed = False
-        db_table = 'subastas'
-
-
 class Transporte(models.Model):
-    id_trans = models.IntegerField(primary_key=True)
-    usuarios_usuarios_id_user = models.ForeignKey('UsuariosUsuarios', models.DO_NOTHING, db_column='usuarios_usuarios_id_user')
+    id_trans = models.AutoField(primary_key=True)
     tip_transporte = models.CharField(max_length=15)
     tamano_trans = models.IntegerField()
     capacidad_trans = models.IntegerField()
     refrigeracion_trans = models.CharField(max_length=10)
-    subastas_id_sub = models.ForeignKey(Subastas, models.DO_NOTHING, db_column='subastas_id_sub')
     fecha_trans = models.DateField()
-
-    class Meta:
-        managed = False
-        db_table = 'transporte'
-
-
-class UserReport(models.Model):
-    reportes_id_report = models.ForeignKey(Reportes, models.DO_NOTHING, db_column='reportes_id_report')
     usuarios_usuarios_id_user = models.ForeignKey('UsuariosUsuarios', models.DO_NOTHING, db_column='usuarios_usuarios_id_user')
 
     class Meta:
         managed = False
-        db_table = 'user_report'
+        db_table = 'transporte'
 
 
 class UsuariosUsuarios(models.Model):
@@ -218,7 +196,7 @@ class UsuariosUsuarios(models.Model):
 
 class VentExtran(models.Model):
     id_vent_ex = models.CharField(primary_key=True, max_length=10)
-    proces_venta_id_venta = models.ForeignKey(ProcesVenta, models.DO_NOTHING, db_column='proces_venta_id_venta')
+    proces_venta_id_proc_venta = models.ForeignKey(ProcesVenta, models.DO_NOTHING, db_column='proces_venta_id_proc_venta')
     nom_cli = models.CharField(max_length=20)
     ape_pat = models.CharField(max_length=20)
     ape_mat = models.CharField(max_length=20)
@@ -231,7 +209,7 @@ class VentExtran(models.Model):
 
 class VentLocal(models.Model):
     id_vent_loc = models.CharField(primary_key=True, max_length=10)
-    proces_venta_id_venta = models.ForeignKey(ProcesVenta, models.DO_NOTHING, db_column='proces_venta_id_venta')
+    proces_venta_id_proc_venta = models.ForeignKey(ProcesVenta, models.DO_NOTHING, db_column='proces_venta_id_proc_venta')
     nom_cli = models.CharField(max_length=20)
     ape_pat = models.CharField(max_length=20)
     ape_mat = models.CharField(max_length=20)

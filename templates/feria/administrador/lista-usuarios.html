@@ -1,0 +1,441 @@
+{% extends 'base/base_logeado.html' %}
+
+
+{% block content %}
+{% load static %}
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="#">
+                        <em class="fa fa-home"></em>
+                    </a></li>
+                <li class="active">Gestor de Cuentas</li>
+            </ol>
+        </div>
+        <!--/.row-->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Gestor de Cuentas</h1>
+            </div>
+        </div>
+        <!--/.row-->
+
+        <div class="panel panel-default">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body tabs">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#tab1" data-toggle="tab">Cliente Externo</a></li>
+                            <li><a href="#tab2" data-toggle="tab">Cliente Local</a></li>
+                            <li><a href="#tab3" data-toggle="tab">Productor</a></li>
+                            <li><a href="#tab4" data-toggle="tab">Transporte</a></li>
+                            <li><a href="#tab5" data-toggle="tab">Consultor</a></li>
+                            <li><a href="#tab6" data-toggle="tab">Administrador</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tab-content">
+
+                        <div class="tab-pane fade in active" id="tab1">
+
+                            	{% if usuarios %}
+								{% for usuario in usuarios %}
+								{% if usuario.tipo_usuario == 'externo' and not usuario.is_staff %}
+                                
+								<div class="row" style="margin-top: 2%; margin-left: 1%; margin-right: 1%;">
+                            	<div class="col-md-3">
+                                    <div class="row">
+                                        <h4 style="padding-left: 3%; margin: 0%;">Usuario</h4>
+                                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+                                            <input class="form-control" value="{{ usuario.username }}" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row">
+                                        <h4 style="padding-left: 3%; margin: 0%;">Nombre</h4>
+                                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+                                            <input class="form-control" value="{{ usuario.first_name }} {{ usuario.last_name }}" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row">
+                                        <h4 style="padding-left: 3%; margin: 0%;">Estado</h4>
+                                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+                                        {% if usuario.is_active %}
+											<td>
+												<input class="form-control" value="Activo" disabled>
+											</td>
+										{% else %}
+											<td> 
+												<input class="form-control" value="Inhabilitado" disabled>	
+											</td>
+										{% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row" style="margin-top: 12%;">
+                                        <a class="btn btn-sm btn-success" type="button" href="{% url 'sistema:editar_usuario' usuario.id_user %}"><em class="fa fa-play"></em>Asignar</a>
+                                        <button type="button" class="btn btn-sm btn-danger" style="margin: 1%;"><em class="fa fa-close"></em> Eliminar</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                                {% endif %}
+		                       	{% endfor %}
+								{% else %}
+
+								<h1>No hay clientes</h1>
+
+								{% endif %}
+
+                        </div>
+
+
+
+
+
+                        
+
+
+                        <div class="tab-pane fade in active" id="tab2">
+
+
+                            	{% if usuarios %}
+								{% for usuario in usuarios %}
+								{% if usuario.tipo_usuario == 'interno' and not usuario.is_staff %}
+                            <div class="row" style="margin-top: 2%; margin-left: 1%; margin-right: 1%;">
+                            	<div class="col-md-3">
+                                    <div class="row">
+                                        <h4 style="padding-left: 3%; margin: 0%;">Usuario</h4>
+                                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+                                            <input class="form-control" value="{{ usuario.username }}" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row">
+                                        <h4 style="padding-left: 3%; margin: 0%;">Nombre</h4>
+                                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+                                            <input class="form-control" value="{{ usuario.first_name }} {{ usuario.last_name }}" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row">
+                                        <h4 style="padding-left: 3%; margin: 0%;">Estado</h4>
+                                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+                                        {% if usuario.is_active %}
+											<td > 
+												
+												<input class="form-control" value="Activo" disabled>
+												
+											</td>
+										{% else %}
+											<td > 
+												
+												<input class="form-control" value="Inhabilitado" disabled>
+												
+											</td>
+										{% endif %}
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row" style="margin-top: 12%;">
+                                        <a class="btn btn-sm btn-success" type="button" href="{% url 'sistema:editar_usuario' usuario.id_user %}"><em class="fa fa-play"></em>Asignar</a>
+                                        <button type="button" class="btn btn-sm btn-danger" style="margin: 1%;"><em class="fa fa-close"></em> Eliminar</button>
+                                    </div>
+                                </div>
+                            </div>
+                                {% endif %}
+		                       	{% endfor %}
+								{% else %}
+
+								<h1>No hay clientes internos</h1>
+
+								{% endif %}
+
+                        </div>
+
+
+
+                        
+
+
+                          <div class="tab-pane fade in active" id="tab3">
+
+
+                            	{% if usuarios %}
+								{% for usuario in usuarios %}
+								{% if usuario.tipo_usuario == 'productor' and not usuario.is_staff %}
+                            <div class="row" style="margin-top: 2%; margin-left: 1%; margin-right: 1%;">
+                            	<div class="col-md-3">
+                                    <div class="row">
+                                        <h4 style="padding-left: 3%; margin: 0%;">Usuario</h4>
+                                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+                                            <input class="form-control" value="{{ usuario.username }}" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row">
+                                        <h4 style="padding-left: 3%; margin: 0%;">Nombre</h4>
+                                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+                                            <input class="form-control" value="{{ usuario.first_name }} {{ usuario.last_name }}" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row">
+                                        <h4 style="padding-left: 3%; margin: 0%;">Estado</h4>
+                                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+                                        {% if usuario.is_active %}
+											<td > 
+												
+												<input class="form-control" value="Activo" disabled>
+												
+											</td>
+										{% else %}
+											<td > 
+												
+												<input class="form-control" value="Inhabilitado" disabled>
+												
+											</td>
+										{% endif %}
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row" style="margin-top: 12%;">
+                                        <a class="btn btn-sm btn-success" type="button" href="{% url 'sistema:editar_usuario' usuario.id_user %}"><em class="fa fa-play"></em>Asignar</a>
+                                        <button type="button" class="btn btn-sm btn-danger" style="margin: 1%;"><em class="fa fa-close"></em> Eliminar</button>
+                                    </div>
+                                </div>
+                            </div>
+                                {% endif %}
+		                       	{% endfor %}
+								{% else %}
+
+								<h1>No hay productores</h1>
+
+								{% endif %}
+
+                        </div>
+
+
+
+                        
+
+
+                        <div class="tab-pane fade in active" id="tab4">
+
+                            	{% if usuarios %}
+								{% for usuario in usuarios %}
+								{% if usuario.tipo_usuario == 'transportista' and not usuario.is_staff %}
+								<div class="row" style="margin-top: 2%; margin-left: 1%; margin-right: 1%;">
+                            	<div class="col-md-3">
+                                    <div class="row">
+                                        <h4 style="padding-left: 3%; margin: 0%;">Usuario</h4>
+                                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+                                            <input class="form-control" value="{{ usuario.username }}" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row">
+                                        <h4 style="padding-left: 3%; margin: 0%;">Nombre</h4>
+                                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+                                            <input class="form-control" value="{{ usuario.first_name }} {{ usuario.last_name }}" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row">
+                                        <h4 style="padding-left: 3%; margin: 0%;">Estado</h4>
+                                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+                                        {% if usuario.is_active %}
+											<td > 
+												
+												<input class="form-control" value="Activo" disabled>
+												
+											</td>
+										{% else %}
+											<td > 
+												
+												<input class="form-control" value="Inhabilitado" disabled>
+												
+											</td>
+										{% endif %}
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row" style="margin-top: 12%;">
+                                        <a class="btn btn-sm btn-success" type="button" href="{% url 'sistema:editar_usuario' usuario.id_user %}"><em class="fa fa-play"></em>Asignar</a>
+                                        <button type="button" class="btn btn-sm btn-danger" style="margin: 1%;"><em class="fa fa-close"></em> Eliminar</button>
+                                    </div>
+                                </div>
+                            </div>
+		                        {% endif %}
+		                       	{% endfor %}
+								{% else %}
+
+								<h1>No hay transportistas</h1>
+
+								{% endif %}
+
+
+                        </div>
+
+
+
+                        
+
+
+                        <div class="tab-pane fade in active" id="tab5">
+                            
+
+                            	{% if usuarios %}
+								{% for usuario in usuarios %}
+								{% if usuario.tipo_usuario == 'consultor' and not usuario.is_staff %}
+								<div class="row" style="margin-top: 2%; margin-left: 1%; margin-right: 1%;">
+                            	<div class="col-md-3">
+                                    <div class="row">
+                                        <h4 style="padding-left: 3%; margin: 0%;">Usuario</h4>
+                                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+                                            <input class="form-control" value="{{ usuario.username }}" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row">
+                                        <h4 style="padding-left: 3%; margin: 0%;">Nombre</h4>
+                                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+                                            <input class="form-control" value="{{ usuario.first_name }} {{ usuario.last_name }}" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row">
+                                        <h4 style="padding-left: 3%; margin: 0%;">Estado</h4>
+                                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+                                        {% if usuario.is_active %}
+											<td > 
+												
+												<input class="form-control" value="Activo" disabled>
+												
+											</td>
+										{% else %}
+											<td > 
+												
+												<input class="form-control" value="Inhabilitado" disabled>
+												
+											</td>
+										{% endif %}
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row" style="margin-top: 12%;">
+                                        <a class="btn btn-sm btn-success" type="button" href="{% url 'sistema:editar_usuario' usuario.id_user %}"><em class="fa fa-play"></em>Asignar</a>
+                                        <button type="button" class="btn btn-sm btn-danger" style="margin: 1%;"><em class="fa fa-close"></em> Eliminar</button>
+                                    </div>
+                                </div>
+                            </div>
+		                       	{% endif %}
+		                       	{% endfor %}
+								{% else %}
+
+								<h1>No hay consultores</h1>
+
+								{% endif %}
+
+
+                        </div>
+
+
+
+                        
+
+                        <div class="tab-pane fade in active" id="tab6">
+                            
+                            	{% if usuarios %}
+								{% for usuario in usuarios %}
+								{% if usuario.is_staff %}
+								<div class="row" style="margin-top: 2%; margin-left: 1%; margin-right: 1%;">
+                            	<div class="col-md-3">
+                                    <div class="row">
+                                        <h4 style="padding-left: 3%; margin: 0%;">Usuario</h4>
+                                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+                                            <input class="form-control" value="{{ usuario.username }}" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row">
+                                        <h4 style="padding-left: 3%; margin: 0%;">Nombre</h4>
+                                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+                                            <input class="form-control" value="{{ usuario.first_name }} {{ usuario.last_name }}" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row">
+                                        <h4 style="padding-left: 3%; margin: 0%;">Estado</h4>
+                                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+                                        {% if usuario.is_active %}
+											<td > 
+												
+												<input class="form-control" value="Activo" disabled>
+												
+											</td>
+										{% else %}
+											<td > 
+												
+												<input class="form-control" value="Inhabilitado" disabled>
+												
+											</td>
+										{% endif %}
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row" style="margin-top: 12%;">
+                                        <a class="btn btn-sm btn-success" type="button" href="{% url 'sistema:editar_usuario' usuario.id_user %}"><em class="fa fa-play"></em>Asignar</a>
+                                        <button type="button" class="btn btn-sm btn-danger" style="margin: 1%;"><em class="fa fa-close"></em> Eliminar</button>
+                                    </div>
+                                </div>
+                            </div>
+                                {% endif %}
+		                       	{% endfor %}
+								{% else %}
+
+								<h1>No hay administradores</h1>
+
+								{% endif %}
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+                <!--/.panel-->
+        </div>
+            <!--/.col-->
+    </div>
+    <!--/.main-->
+
+
+{% endblock %}

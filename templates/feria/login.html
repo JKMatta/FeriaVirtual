@@ -1,26 +1,49 @@
-{% extends 'base/base.html' %}
+
 {% load static %}
+
+{% block extrastatic %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock %}
 
 {% block content %}
 
+<div class="divlogin">
 
+<hgroup>
+	<h1>Maipo Grande</h1>
+	<a class="back" href="{% url 'base:index' %}">volver al inicio</a>
+</hgroup>
 
-<div class = "row">
-    <section class="col-6 col-md-4 form-iniciar">
-    	<form method="post">
-    		{% csrf_token %}
-	        <h4> Iniciar Sesión </h4>
-	        <input class = "controls" type="text" name="username" id="user" placeholder="ingrese su usuario">
-	        <input class = "controls" type="password" name="password" id="pass" placeholder="ingrese su contraseña">
-	        <input class = "botons" type="submit" value="Iniciar Sesión">
-	        <p><a href="{% url 'registrarse' %}"> Deseo registrarme </a></p>
-	        <p><a href="#"> Olvide mi Contraseña </a></p>
-        </form>
-    </section>
-</div>
+<form method="post">
+{% csrf_token %}
 
+	<div class="group">
+	  <input type="text" name="username"><span class="highlight"></span><span class="bar"></span>
+	  <label for="username">Usuario</label>
+	</div>
+
+	<div class="group" id="contra">
+	  <input type="password" name="password"><span class="highlight"></span><span class="bar"></span>
+	  <label for="password">Contraseña</label>
+	</div>
+
+	<div id="botones">
+		<button type="submit" class="button buttonBlue" value="Ingresar" >Iniciar Sesión
+			<div class="ripples buttonRipples" id="botonlog"><span class="ripplesCircle"></span></div>
+		</button>
+	</div>
+
+	<div class="new-account">
+		<a href="{% url 'registrarse' %}">crear cuenta</a>
+	</div>
+
+  </form>
+  
+  <footer><a href="https://www.duoc.cl"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Logo_DuocUC.svg/800px-Logo_DuocUC.svg.png"></a>
+	<p>GitHub - <a href="https://github.com/JKMatta/FeriaVirtual" target="_blank">Repositorio</a></p>
+  </footer>
 
 
 {% endblock %}
-
-
+<script src="{% static 'js/login.js' %}"></script>

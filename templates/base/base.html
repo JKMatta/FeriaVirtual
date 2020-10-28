@@ -1,56 +1,325 @@
 {% load static %}
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="utf-8">
+  <meta charset="utf-8">
+  <title>Maipo Grande</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
 
-    {% block extrastatic %}
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon">
-    <title> Feria Virtual - Registrarse </title>
-    <!-- CSS -->
-    <link rel = "stylesheet" type = "text/css" href = "{% static 'css/css-ini-re.css' %}"/>
-    <link rel = "stylesheet" type = "text/css" href = "{% static 'css/bootstrap.css' %}"/>
-    <link rel = "stylesheet" type = "text/css" href = "{% static 'css/bootstrap.min.css' %}">
-    {% endblock %}
+  <!-- Favicon -->
+  <link href="{% static 'img/favicon.png' %}" rel="icon">
+  <link href="{% static 'img/apple-touch-icon.png' %}" rel="apple-touch-icon">
 
-    <title>Index</title>
+  <!-- Fuente -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800|Montserrat:300,400,700" rel="stylesheet">
+  
+  <link href="{% static 'lib/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'lib/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+  <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+  <link href="{% static 'lib/ionicons/css/ionicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+  <link href="{% static 'lib/magnific-popup/magnific-popup.css' %}" rel="stylesheet">
+  <link href="{% static 'lib/ionicons/css/ionicons.min.css' %}" rel="stylesheet">
 
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
 </head>
 
-<body class="bodyindex">
+<body id="body">  
 
-            <header class = "row">
-                <div class = "col-sm">
-                    <a href="#"> <img src = "{% static 'img/logo-principal.png' %}" alt = "logo" class = "fotologo"/> 
-                </div>
-            </header>
-  
-{% block content %}
+  <header id="header">
+    <div class="container">
 
-<div class="menu">
+      <div id="logo" class="pull-left">
+        <h1><a href="#body" class="scrollto">Maipo <span>Grande</span></a></h1>
+        <!-- <a href="#body"><img src="https://www.frutosdelmaipo.cl/wp-content/uploads/2018/08/LOGO-FDM-R-space.png" alt="" title="" style="width: 60px;"></a> -->
+      </div>
 
-    <br>
-<center>
-    <a href="{% url 'registrarse' %}" style="color: white; font-size: 20px;">REGISTRARSE</a><br>
-    <a href="{% url 'login' %}" style="color: white; font-size: 20px;">INICIAR SESION</a>
-</center>
+      <nav id="nav-menu-container">
+        <ul class="nav-menu">
+          <li class="menu-active"><a href="#body">Inicio</a></li>
+          <li><a href="#about">Nosotros</a></li>
+          <li><a href="#clients">¿Como Funciona?</a></li>
+          <li><a href="#contact">Soporte</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-</div>
+  <!--==========================
+    Intro Section
+  ============================-->
+  <section id="intro">
 
-{% endblock %}
+    <div class="intro-content">
+      <h2>Compra & Vende<br>con Nosotros!</h2>
+      <div>
+        <a href="{% url 'registrarse' %}" class="btn-get-started scrollto">Regístrate</a>
+        <a href="{% url 'login' %}" class="btn-projects scrollto">Tengo Cuenta</a>
+      </div>
+    </div>
 
+    <div id="intro-carousel" class="owl-carousel" >
+      <div class="item" style="background-image: url('https://laguiadesantiago.com/wp-content/uploads/2017/08/mercado-vega-santiago.jpg');"></div>
+      <div class="item" style="background-image: url('https://www.servicoloriberia.com/wp-content/uploads/2019/08/transporte-alimentos-perecederos-600x338.jpg');"></div>
+      <div class="item" style="background-image: url('https://cr00.epimg.net/radio/imagenes/2020/08/06/ibague/1596716087_512582_1596716295_noticia_normal.jpg');"></div>
+    </div>
 
-{% block footer %}
+  </section>
 
-{% endblock %}
+  <main id="main">
 
-<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!--==========================
+      About Section
+    ============================-->
+    <section id="about" class="wow fadeInUp">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 about-img">
+            <img src="{% static 'img/PDCA (Plan, Do, Check, Act) cycle.png' %}" alt="">
+          </div>
 
+          <div class="col-lg-6 content">
+            <h2>Nosotros</h2>
+            <h3>Somos una empresa dedicada a la gestión de compra y venta de alimentos. Distribuye tus productos de forma rápida y segura</h3>
+
+            <ul>
+              <li><i class="ion-android-checkmark-circle"></i> Sin riesgos de estafas</li>
+              <li><i class="ion-android-checkmark-circle"></i> Tú decides sobre la calidad y entrega del producto</li>
+              <li><i class="ion-android-checkmark-circle"></i> Si hay algún problema con tu pedido, nosotros nos encargamos</li>
+            </ul>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!--==========================
+      Services Section
+    ============================-->
+    <section id="services">
+      <div class="container">
+        <div class="section-header">
+          <h2>Únete a Nosotros!</h2>
+          <p>En Maipo Grande tenemos diversos cargos para que empieces a trabajar con nosotros</p>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-6">
+            <div class="box wow fadeInLeft">
+              <div class="icon"><img src="img/icons8-vegetarian_food.png" alt=""></div>
+              <h4 class="title"><a href="">Productor</a></h4>
+              <p class="description">Todos nuestros productores estan certificados para entregar el mejor producto a nuestros clientes</p>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="box wow fadeInRight">
+              <div class="icon"><img src="img/icons8-laptop_metrics.png" alt=""></div>
+              <h4 class="title"><a href="">Consultor</a></h4>
+              <p class="description">Realiza análisis financieros de diversas tareas. Identifica y optimiza procesos para la mejora continua.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="box wow fadeInLeft" data-wow-delay="0.2s">
+              <div class="icon"><img src="img/icons8-flying_duck.png" alt=""></div>
+              <h4 class="title"><a href="">Transporte</a></h4>
+              <p class="description">Todos nuestros transportistas estan certificados para despachar todo tipo de productos a nuestros clientes</p>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="box wow fadeInRight" data-wow-delay="0.2s">
+              <div class="icon"><img src="img/icons8-account.png" alt=""></div>
+              <h4 class="title"><a href="">Cliente</a></h4>
+              <p class="description">Tenemos disponible clientes externos (delivery) y clientes Locales</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!--==========================
+      Clients Section
+    ============================-->
+    <section id="clients" class="wow fadeInUp">
+      <div class="container">
+        <div class="section-header" style="text-align: justify;">
+          <h2>¿Como Funciona?</h2>
+          <p>Maipo Grande ofrece un sistema novedoso para la Compra/Venta de productos alimenticios y sin riesgos de estafas</p>
+        </div>
+
+        <div style="margin-top: 5%; margin-left: 3%; text-align: justify; margin-right: 7%;">
+          <h3>Paso 1:</h3>
+          <p style="margin-left: 5%;">El <b>Cliente Externo</b> ingresa una solicitud de compra la cual es enviada a la administración para su revisión y posterior aprobación. Si la información proporcionada es válida, esta solicitud para a ser una venta en estado <b>"En espera"</b></p>
+        </div>
+
+        <div style="margin-top: 5%; margin-left: 3%; text-align: justify; margin-right: 7%;">
+          <h3>Paso 2:</h3>
+          <p style="margin-left: 5%;">Todas las ventas en estado de <b>espera</b> son ingresadas y habilitadas en la <b>Lista de Pedidos</b> de los <b>productores</b>. En este proceso los productores realizan ofertas de precio y calidad del producto para la venta. <i>El Cliente es el encargado de <b>seleccionar la mejor oferta recibida</b> para el acuerdo de venta</i>.</p>
+        </div>
+
+        <div style="margin-top: 5%; margin-left: 3%; text-align: justify; margin-right: 7%;">
+          <h3>Paso 3:</h3>
+          <p style="margin-left: 5%;">Después de elegir al proveedor de la venta, esta es ingresada y habilitada en la lista de espera de <b>Servicio de Transporte</b>. Al igual que los proveedores, los transportistas deben realizar ofertas de traslados los cuales integran la calidad y tiempo de entrega. <i>El cliente tiene la total autoridad de seleccionar el mejor servicio de transporte para el despacho de su solicitud</i>.</p>
+        </div>
+
+        <div style="margin-top: 5%; margin-left: 3%; text-align: justify; margin-right: 7%;">
+          <h3>Paso 4:</h3>
+          <p style="margin-left: 5%;">Cuando la venta tenga asignado un <i>proveedor y el servicio de transporte</i>, la venta pasará en estado de <b>"En proceso"</b> en el cual el pedido del cliente estará en desarrollo. <i>El tiempo de despacho es relativo dependiendo del tipo de producto, ubicación del proveedor y ubicación de entrega</i>.</p>
+        </div>
+
+        <div style="margin-top: 5%; margin-left: 3%; margin-bottom: 10%; text-align: justify; margin-right: 7%;">
+          <h3>Paso 5:</h3>
+          <p style="margin-left: 5%;">Una vez llegado el pedido al lugar de entrega, el cliente debe verificar el estado del producto solicitado. Si todo esta en orden, el cliente debe realizar el <i>checkpay</i>. <b>El checkpay descontará de forma automática el costo total del pedido</b>. Cuando este proceso es aprobado, se le hace entrega de los productos al cliente y la venta pasará al estado de <b>Finalizado</b>.</p>
+        </div>
+
+        <div class="owl-carousel clients-carousel">
+          <img src="{% static 'img/clients/client-1.png' %}" alt="">
+          <img src="{% static 'img/clients/client-2.png' %}" alt="">
+          <img src="{% static 'img/clients/client-3.png' %}" alt="">
+          <img src="{% static 'img/clients/client-4.png' %}" alt="">
+          <img src="{% static 'img/clients/client-5.png' %}" alt="">
+          <img src="{% static 'img/clients/client-6.png' %}" alt="">
+          <img src="{% static 'img/clients/client-7.png' %}" alt="">
+          <img src="{% static 'img/clients/client-8.png' %}" alt="">
+        </div>
+
+      </div>
+    </section>
+
+    <!--==========================
+      Call To Action Section
+    ============================-->
+    <section id="call-to-action" class="wow fadeInUp">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-9 text-center text-lg-left">
+            <h3 class="cta-title">Se parte de Nosotros!</h3>
+            <p class="cta-text"> No esperes más. Compra y Vende de forma segura y rápida.</p>
+          </div>
+          <div class="col-lg-3 cta-btn-container text-center">
+            <a class="cta-btn align-middle" href="#">Crear Cuenta</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!--==========================
+      Contact Section
+    ============================-->
+    <section id="contact" class="wow fadeInUp">
+      <div class="container">
+        <div class="section-header">
+          <h2>Contact Us</h2>
+          <p>Cualquier problema o consulta que usted tenga, no dude en comunicar con nosotros</p>
+        </div>
+
+        <div class="row contact-info">
+
+          <div class="col-md-4">
+            <div class="contact-address">
+              <i class="ion-ios-location-outline"></i>
+              <h3>Dirección</h3>
+              <address>Dávila Baeza 700, Recoleta, Región Metropolitana</address>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="contact-phone">
+              <i class="ion-ios-telephone-outline"></i>
+              <h3>Teléfono</h3>
+              <p><a href="tel:+227373051">+2 2737 3051</a></p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="contact-email">
+              <i class="ion-ios-email-outline"></i>
+              <h3>Email</h3>
+              <p><a href="mailto:soporte@maipogrande.cl">soporte@maipogrande.cl</a></p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="container mb-4">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22864.11283411948!2d-73.96468908098944!3d40.630720240038435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew+York%2C+NY%2C+USA!5e0!3m2!1sen!2sbg!4v1540447494452" width="100%" height="380" frameborder="0" style="border:0" allowfullscreen></iframe>
+      </div>
+
+      <div class="container">
+        <div class="form">
+          <div id="sendmessage">hemos recibido tu mensaje. Gracias!</div>
+          <div id="errormessage"></div>
+          <form action="" method="post" role="form" class="contactForm">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <input type="text" name="name" class="form-control" id="name" placeholder="Su nombre y apellido" data-rule="minlen:6" data-msg="Por favor ingrese su nombre y apellido" />
+                <div class="validation"></div>
+              </div>
+              <div class="form-group col-md-6">
+                <input type="email" class="form-control" name="email" id="email" placeholder="Su correo electrónico" data-rule="email" data-msg="Por favor ingrese su correo electrónico" />
+                <div class="validation"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="subject" id="subject" placeholder="Asunto" data-rule="minlen:4" data-msg="Por favor ingrese un asunto al mensaje" />
+              <div class="validation"></div>
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Escriba su mensaje aquí" placeholder="Message"></textarea>
+              <div class="validation"></div>
+            </div>
+            <div class="text-center"><button type="submit">Enviar</button></div>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!--==========================
+    Footer
+  ============================-->
+  <footer id="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong>Maipo Grande</strong>. Todos los derechos reservados
+      </div>
+      <div class="credits">
+        Repositorio <a href="https://github.com/JKMatta/FeriaVirtual">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+  <!-- JavaScript Libraries -->
+  <script src="{% static 'lib/jquery/jquery.min.js'%}"></script>
+  <script src="{% static 'lib/jquery/jquery-migrate.min.js' %}"></script>
+  <script src="{% static 'lib/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+  <script src="{% static 'lib/superfish/hoverIntent.js' %}"></script>
+  <script src="{% static 'lib/superfish/superfish.min.js' %}"></script>
+  <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+  <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'lib/magnific-popup/magnific-popup.min.js' %}"></script>
+  <script src="{% static 'lib/sticky/sticky.js' %}"></script>
+
+  <script src="{% static 'contactform/contactform.js' %}"></script>
+
+  <script src="{% static 'js/main.js' %}"></script>
 
 </body>
 </html>

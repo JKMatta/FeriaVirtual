@@ -1,0 +1,113 @@
+{% extends 'base/base_logeado.html' %}
+
+
+
+
+{% block content %}
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="#">
+                        <em class="fa fa-home"></em>
+                    </a></li>
+                <li class="active">Pedido </li>
+            </ol>
+        </div>
+        <!--/.row-->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Ofrecer mis productos</h1>
+            </div>
+        </div>
+        <!--/.row-->
+        <div class="panel panel-default">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab1">
+							<br>
+							<center>
+								<div class="container">
+									<form method="POST">
+										{% csrf_token %}
+								        <div class="panel panel-default">
+								            <div class="panel-heading"><h5>Pedido del cliente</h5></div>
+								            <div class="row" style="padding: 1%; margin-left: 1%; margin-right: 1%;">
+								                <div class="col-md-3">
+								                    <div class="row">
+								                        <h4 style="padding-left: 3%; margin: 0%;">Tipo de producto</h4>
+								                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+								                            <input class="form-control" type="text" name="tipo" value="{{ form.tipo.value }}" class="form-control col-10" maxlength="200" required="" id="id_tipo" disabled>
+								                        </div>
+								                    </div>
+								                </div>
+								                <div class="col-md-3">
+								                    <div class="row">
+								                        <h4 style="padding-left: 3%; margin: 0%;">Fecha solicitado</h4>
+								                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+								                            <input class="form-control"type="text" name="fecha" value="{{ form.fecha.value }}" required="" id="id_fecha" disabled>
+								                        </div>
+								                    </div>
+								                </div>
+								                <div class="col-md-3">
+								                    <div class="row">
+								                        <h4 style="padding-left: 3%; margin: 0%;">Descripcion</h4>
+								                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+								                            <input class="form-control" type="text" name="descrip" value="{{ form.descrip.value }}" class="form-control col-10" maxlength="200" required="" id="id_descrip" disabled>
+								                        </div>
+								                    </div>
+								                </div>
+								            </div>
+								        </div>
+
+								        <div class="panel panel-default">
+								            <div class="panel-heading"><h5>Realizar oferta</h5></div>
+								            <div class="row" style="padding: 1%; margin-left: 1%; margin-right: 1%;">
+								                <div class="col-md-3">
+								                    <div class="row">
+								                        <h4 style="padding-left: 3%; margin: 0%;">Mis Productos</h4>
+								                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+								                            {% if productos %}
+															<select class="form-control" name="productos_id_prod" id="id_productos_id_prod">
+															  	<option value="" selected="">---------</option>
+															  	{% for producto in productos %}
+																{% if producto.usuarios_usuarios_id_user.id_user == request.user.id_user %}
+															  	<option value="{{ producto.id_prod }}">{{ producto.nom_prod }}</option>
+															  	{% endif %}
+																{% endfor %}
+															</select>
+															{% else %}
+																<h1>No hay productos</h1>
+															{% endif %}
+								                        </div>
+								                    </div>
+								                </div>
+								            </div>
+								        </div>
+
+
+								        <div style="display: none;">
+								        	{{ form.tipo }}
+								        	{{ form.fecha }}
+								        	{{ form.descrip}}
+								        </div>
+
+										<br>
+										<button class="btn btn-primary" type="submit">Guardar</button>
+									</form>
+								</div>
+							</center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            	<!--/.panel-->
+        </div>
+            <!--/.col-->
+    </div>   
+    	<!--/.main-->
+
+
+{% endblock %}

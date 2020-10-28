@@ -1,0 +1,128 @@
+{% extends 'base/base_logeado.html' %}
+
+{% block content %}
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="#">
+                        <em class="fa fa-home"></em>
+                    </a></li>
+                <li class="active">Solicitudes</li>
+            </ol>
+        </div>
+        <!--/.row-->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Mis solicitudes</h1>
+            </div>
+        </div>
+        <!--/.row-->
+        <div class="panel panel-default">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab1">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>Tipo de Producto</th>
+										<th>Fecha Solicitada</th>
+										<th>Vendedor</th>
+										<th>Producto Ofrecido</th>
+										<th>Transportista</th>
+										<th>Transporte Ofrecido</th>
+										<th>Estado</th>
+										<th>Acción</th>
+										<th>Seguimiento</th>
+									</tr>
+								</thead>
+
+								<tbody>
+
+							{% load static %}
+
+									{% if procesos %}
+									{% for proceso in procesos %}
+										
+									{% if proceso.pedido_id_ped.usuarios_usuarios_id_user.id_user == request.user.id_user %}
+									<tr>
+										<td><center>{{ proceso.pedido_id_ped.tipo }}</center></td>
+										<td><center>{{ proceso.pedido_id_ped.fecha }}</center></td>
+										<td><center>{{ proceso.pedido_id_ped.productos_id_prod.usuarios_usuarios_id_user.username }}</center></td>
+										<td><center>{{ proceso.pedido_id_ped.productos_id_prod.nom_prod }}</center></td>
+										<td><center>{{ proceso.transporte_id_trans.usuarios_usuarios_id_user.username }}</center></td>
+										<td><center>{{ proceso.transporte_id_trans.tip_transporte }}</center></td>
+
+										{% if proceso.estado_proceso == False %}
+										<td><center><a class="btn btn-primary" href="{% url 'sistema:respondertransport' proceso.id_proc_pedido %}">Responder</a></center></td>
+										{% else %}
+										<td><center>Aceptado</center></td>
+										{% endif %}
+
+
+										{% if proceso.estado_proceso == True %}
+										<td><center><a class="btn btn-primary" href="{% url 'sistema:eliminaroferta' proceso.id_proc_pedido %}" style="background-color: red;">Cancelar oferta</a></center></td>
+										{% else %}
+										<td><center>Pendiente</center></td>
+										{% endif %}
+
+
+
+										
+										{% if proceso.estado_proceso == True %}
+										{% if seguimientos %}
+										{% for seguimiento in seguimientos %}
+
+											{% if seguimiento.proces_pedido_id_proc_pedido.id_proc_pedido == proceso.id_proc_pedido %}
+											<td><center>En seguimiento</center></td>
+											{% else %}
+											<td><center><a class="btn btn-primary" href="{% url 'sistema:solicitarseg' proceso.id_proc_pedido %}">Solicitar seguimiento</a></center></td>
+
+											{% endif %}
+
+										{% endfor %}
+										{% else %}
+
+											{% if proceso.estado_proceso == True %}
+												<td><center><a class="btn btn-primary" href="{% url 'sistema:solicitarseg' proceso.id_proc_pedido %}">Solicitar seguimiento</a></center></td>
+											{% endif %}
+											
+										{% endif %}
+										{% else %}
+										<td><center>Pendiente</center></td>
+										{% endif %}
+
+
+
+										
+
+
+									</tr>
+									{% endif %}
+									{% endfor %}
+
+
+
+									{% else %}
+
+									<h1>No hay procesos</h1>
+
+									{% endif %}
+
+								</tbody>
+
+							</table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            	<!--/.panel-->
+        </div>
+            <!--/.col-->
+    </div>   
+    	<!--/.main-->
+
+{% endblock %}

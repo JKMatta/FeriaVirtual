@@ -1,0 +1,61 @@
+{% extends 'base/base_logeado.html' %}
+
+{% block content %}
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="#">
+                        <em class="fa fa-home"></em>
+                    </a></li>
+                <li class="active">Solicitudes</li>
+            </ol>
+        </div>
+        <!--/.row-->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Mis solicitudes</h1>
+            </div>
+        </div>
+        <!--/.row-->
+        <div class="panel panel-default">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab1">
+							<table class="table table-bordered">
+
+<br>
+<center>
+
+		<h1 class="titulo">Solicitar seguimiento</h1>
+		<h2 class="titulo">Para el pedido de {{ solicitarseg.pedido_id_ped.tipo }} </h2>
+		<h2 class="titulo">con fecha de entrega para el dia {{ solicitarseg.pedido_id_ped.fecha }} </h2>
+	<div class="container">
+
+		<form method="POST">
+			{% csrf_token %}
+			<input type="text" name="pedido_id_ped" class="form-control col-10" id="id_pedido_id_ped" value="{{ solicitarseg.pedido_id_ped.id_ped }}" style="display: none;">
+			<input type="text" name="proces_pedido_id_proc_pedido" class="form-control col-10" required="" id="id_proces_pedido_id_proc_pedido" value="{{ solicitarseg.id_proc_pedido }}" style="display: none;"> 
+			<br>
+			<br>
+			<button class="btn btn-primary" type="submit"> Solicitar</button>
+		</form>
+
+	</div>
+
+</center>
+							</table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            	<!--/.panel-->
+        </div>
+            <!--/.col-->
+    </div>   
+    	<!--/.main-->
+{% endblock %}

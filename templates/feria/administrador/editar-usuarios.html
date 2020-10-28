@@ -1,0 +1,177 @@
+{% extends 'base/base_logeado.html' %}
+
+
+
+
+{% block content %}
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="#">
+                        <em class="fa fa-home"></em>
+                    </a></li>
+                <li class="active">Usuarios </li>
+            </ol>
+        </div>
+        <!--/.row-->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Actualizar usuario</h1>
+            </div>
+        </div>
+        <!--/.row-->
+        <div class="panel panel-default">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab1">
+							<br>
+							<center>
+								<div class="container">
+									<form method="POST">
+										{% csrf_token %}
+								        <div class="panel panel-default">
+								            <div class="panel-heading"><h5>Datos personales</h5></div>
+								            <div class="row" style="padding: 1%; margin-left: 1%; margin-right: 1%;">
+								                <div class="col-md-3">
+								                    <div class="row">
+								                        <h4 style="padding-left: 3%; margin: 0%;">Nombre</h4>
+								                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+								                            <input class="form-control" type="text" name="first_name" value="{{ form.first_name.value }}" maxlength="100" required="" id="id_first_name" disabled>
+								                        </div>
+								                    </div>
+								                </div>
+								                <div class="col-md-3">
+								                    <div class="row">
+								                        <h4 style="padding-left: 3%; margin: 0%;">Apellido</h4>
+								                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+								                            <input class="form-control" type="text" name="last_name" value="{{ form.last_name.value }}" maxlength="100" required="" id="id_last_name" disabled>
+								                        </div>
+								                    </div>
+								                </div>
+								                <div class="col-md-3">
+								                    <div class="row">
+								                        <h4 style="padding-left: 3%; margin: 0%;">Correo electronico</h4>
+								                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+								                            <input class="form-control" type="email" name="email" value="{{ form.email.value }}" maxlength="254" required="" id="id_email" disabled>
+								                        </div>
+								                    </div>
+								                </div>
+								                <div class="col-md-3">
+								                    <div class="row">
+								                        <h4 style="padding-left: 3%; margin: 0%;">Nombre de usuario</h4>
+								                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+								                            <input class="form-control" type="text" name="username" value="{{ form.username.value }}" maxlength="50" required="" id="id_username" disabled>
+								                        </div>
+								                    </div>
+								                </div>
+								                <div class="col-md-3">
+								                    <div class="row">
+								                        <h4 style="padding-left: 3%; margin: 0%;">Usuario activo</h4>
+								                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+								                            {{ form.is_active }}
+								                        </div>
+								                    </div>
+								                </div>
+								            </div>
+								        </div>
+
+								        <div class="panel panel-default">
+								            <div class="panel-heading"><h5>Datos del contrato</h5></div>
+								            <div class="row" style="padding: 1%; margin-left: 1%; margin-right: 1%;">
+								                <div class="col-md-3">
+								                    <div class="row">
+								                        <h4 style="padding-left: 3%; margin: 0%;">Rut</h4>
+								                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+								                            <input class="form-control" type="text" name="rut_person" value="{{ form2.rut_person.value }}" maxlength="20" required="" id="id_rut_person" disabled>
+								                        </div>
+								                    </div>
+								                </div>
+
+								                <div class="col-md-3">
+								                    <div class="row">
+								                        <h4 style="padding-left: 3%; margin: 0%;">Telefono</h4>
+								                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+								                            <input class="form-control" type="number" name="phone_contrat" value="{{ form2.phone_contrat.value }}" required="" id="id_phone_contrat"disabled>
+								                        </div>
+								                    </div>
+								                </div>
+
+								                <div class="col-md-3">
+								                    <div class="row">
+								                        <h4 style="padding-left: 3%; margin: 0%;">Fecha emitida</h4>
+								                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+								                            <input class="form-control" type="text" name="emision_contrat" value="{{ form2.emision_contrat.value }}" id="id_emision_contrat" disabled>
+								                        </div>
+								                    </div>
+								                </div>
+
+								                <div class="col-md-3">
+								                    <div class="row">
+								                        <h4 style="padding-left: 3%; margin: 0%;">Fecha de termino</h4>
+								                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+								                            <input class="form-control" type="text" name="fin_contrat" value="{{ form2.fin_contrat.value }}" id="id_fin_contrat" disabled>
+								                        </div>
+								                    </div>
+								                </div>
+
+								                <div class="col-md-3">
+								                    <div class="row">
+								                        <h4 style="padding-left: 3%; margin: 0%;">Estado del contrato</h4>
+								                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+								                            {{ form2.estado }}
+								                        </div>
+								                    </div>
+								                </div>
+
+								                <div class="col-md-3">
+								                    <div class="row">
+								                        <h4 style="padding-left: 3%; margin: 0%;">Rol</h4>
+								                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+								                            {{ form.tipo_usuario }}
+								                        </div>
+								                    </div>
+								                </div>
+
+								            </div>
+								        </div>
+
+
+								        <div style="display: none;">
+								        	{{ form.first_name }}
+								        	{{ form.last_name }}
+								        	{{ form.email }}
+								        	{{ form.username }}
+								        	{{ form2.rut_person }}
+								        	{{ form2.phone_contrat }}
+								        	{{ form2.emision_contrat }}
+								        	{{ form2.fin_contrat }}
+								        </div>
+
+
+
+
+
+
+
+										<br>
+										<button class="btn btn-primary" type="submit">Guardar</button>
+									</form>
+								</div>
+							</center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            	<!--/.panel-->
+        </div>
+            <!--/.col-->
+    </div>   
+    	<!--/.main-->
+{% endblock %}
+
+
+
+

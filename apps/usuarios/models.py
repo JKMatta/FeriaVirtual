@@ -30,7 +30,7 @@ class usuarios(AbstractBaseUser, PermissionsMixin):
 	is_active = models.BooleanField('Esta activo',default=True)
 	is_staff = models.BooleanField('Es administrador',default=False)
 	tipos = (('productor','Productor'),('interno','Interno'),('externo','Externo'),('consultor','Consultor'),('transportista','Transportista'))
-	tipo_usuario = models.CharField(max_length=50,choices=tipos,default='consultor')
+	tipo_usuario = models.CharField(max_length=50,choices=tipos,default='externo')
 
 	USERNAME_FIELD = 'email'
 	REQUIRED_FIELDS = ['username']

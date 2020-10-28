@@ -1,0 +1,52 @@
+{% extends 'base/base_logeado.html' %}
+
+
+
+
+{% block content %}
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="#">
+                        <em class="fa fa-home"></em>
+                    </a></li>
+                <li class="active">Seguimiento</li>
+            </ol>
+        </div>
+        <!--/.row-->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Actualizar seguimiento</h1>
+            </div>
+        </div>
+        <!--/.row-->
+        <div class="panel panel-default">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab1">
+							<center>
+									<h2>Produto: {{ adminissegui.pedido_id_ped.tipo }}</h2>	
+									<h2>Estado</h2>	
+								<div class="container">
+									<form method="POST">
+										{% csrf_token %}
+										{{ form.est_seguimiento }}
+										<br>
+										<br>
+										<button type="submit" class="btn btn-primary">Guardar</button>
+									</form>
+								</div>
+							</center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            	<!--/.panel-->
+        </div>
+            <!--/.col-->
+    </div>   
+    	<!--/.main-->
+{% endblock %}

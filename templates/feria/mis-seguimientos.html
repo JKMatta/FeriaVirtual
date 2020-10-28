@@ -1,0 +1,73 @@
+{% extends 'base/base_logeado.html' %}
+
+{% block content %}
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="#">
+                        <em class="fa fa-home"></em>
+                    </a></li>
+                <li class="active">Seguimiento</li>
+            </ol>
+        </div>
+        <!--/.row-->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Estado de mis productos</h1>
+            </div>
+        </div>
+        <!--/.row-->
+        <div class="panel panel-default">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab1">
+<table class="table table-bordered" style="margin-left: 5%;margin-right: 5%; width: 90%;">
+	<thead>
+		<tr>
+			<th><center>Mi producto</center></th>
+			<th><center>Estado actual</center></th>
+		</tr>
+	</thead>
+
+<tbody>
+
+
+{% load static %}
+
+	{% if seguimientos %}
+	{% for seguimiento in seguimientos %}
+
+		{% if seguimiento.pedido_id_ped.usuarios_usuarios_id_user.id_user == request.user.id_user %}
+
+			<tr>
+				<td><center>{{ seguimiento.pedido_id_ped.tipo }}</center></td>
+				<td><center>{{ seguimiento.est_seguimiento }}</center></td>
+			</tr>
+
+		{% endif %}
+
+	{% endfor %}
+	{% else %}
+
+	<h1>No has solicitado seguimientos</h1>
+
+	{% endif %}
+
+</tbody>
+
+</table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            	<!--/.panel-->
+        </div>
+            <!--/.col-->
+    </div>   
+    	<!--/.main-->
+
+
+{% endblock %}

@@ -2,98 +2,402 @@
 
 {% block content %}
 
-
 {% if request.user.is_staff %}
 
-    <h1 style="color: white;">Bienvenido, administrador {{ request.user.username }}</h1>
-	<div class="row">
-        <aside class = ".col-6 .col-md-4 opciones">
-            <h4> Procesos de Venta Disponibles </h4>
-            <nav id="vist-prod">
-                <ul>
-                    <li> <a href="{% url 'sistema:listaprod' %}"> Lista </a> </li>
-                    <li> <a href=""> Crear Proceso de Venta </a> </li>
-                </ul>
-            </nav>
-            <h5> Usuarios </h5>
-            <nav id = "vist-prod">
-                <ul>
-                    <li> <a href="{% url 'sistema:usuarios' %}"> Ver / Modificar / Eliminar </a> </li>
-                </ul>
-            </nav>
-            <h5> Resumen de Ventas </h5>
-            <nav id = "vist-prod">
-                <ul>
-                    <li> <a href=""> Estadisticas </a> </li>
-                </ul>
-            </nav>
-        </aside>
-    </div>  
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="#">
+                        <em class="fa fa-home"></em>
+                    </a></li>
+                <li class="active">Resumen</li>
+            </ol>
+        </div>
+        <!--/.row-->
 
-{% else %}
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Resumen</h1>
+            </div>
+        </div>
+        <!--/.row-->
 
-	{% if request.user.tipo_usuario == 'productor' %}
+        <div class="panel panel-container">
+            <div class="row">
+                <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+                    <div class="panel panel-teal panel-widget border-right">
+                        <div class="row no-padding"><em class="fa fa-xl fa-shopping-cart color-blue"></em>
+                            <div class="large">17</div>
+                            <div class="text-muted">Ventas Activas</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+                    <div class="panel panel-blue panel-widget border-right">
+                        <div class="row no-padding"><em class="fa fa-xl fa-check color-orange"></em>
+                            <div class="large">13</div>
+                            <div class="text-muted">Ventas Cerradas</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+                    <div class="panel panel-orange panel-widget border-right">
+                        <div class="row no-padding"><em class="fa fa-xl fa-question color-teal"></em>
+                            <div class="large">2</div>
+                            <div class="text-muted">Ayuda Soporte Activas</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+                    <div class="panel panel-red panel-widget ">
+                        <div class="row no-padding"><em class="fa fa-xl fa-money color-red"></em>
+                            <div class="large">251k</div>
+                            <div class="text-muted">Ganancias (CLP)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.row-->
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Ganancias / Inversiones
+                        <span class="pull-right clickable panel-toggle panel-button-tab-left"><em
+                                class="fa fa-toggle-up"></em></span></div>
+                    <div class="panel-body">
+                        <div class="canvas-wrapper">
+                            <canvas class="main-chart" id="line-chart" height="200" width="600"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.row-->
 
-	<h1 style="color: white;">Bienvenido, productor {{ request.user.username }}</h1>
-	<div class="row">
-            <aside class = ".col-6 .col-md-4 opciones">
-                <h4> Procesos de Venta Disponibles </h4>
-                <br>
-                <h5> Procesos de venta </h5>
-                <nav id="vist-prod">
-                    <ul>
-                        <li> <a href="{% url 'sistema:regprod' %}"> Agregar Productos </a> </li>
-                        <li> <a href=""> Ver productos </a> </li>
-                        <li> <a href=""> Modificar Productos </a> </li>
-                        <li> <a href=""> Eliminar productos </a> </li>
-                    </ul>
-                </nav>
-                <h5> Ganancias </h5>
-                <nav id = "vist-prod">
-                    <ul>
-                        <li> <a href=""> Ganancias globales </a> </li>
-                    </ul>
-                </nav>
-            </aside>
-        </div>  
+        <div class="row">
+            <div class="col-xs-6 col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-body easypiechart-panel">
+                        <h4>Solicitudes Compra</h4>
+                        <div class="easypiechart" id="easypiechart-blue" data-percent="92"><span
+                                class="percent">92%</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-body easypiechart-panel">
+                        <h4>Ventas Activas</h4>
+                        <div class="easypiechart" id="easypiechart-orange" data-percent="65"><span
+                                class="percent">65%</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-body easypiechart-panel">
+                        <h4>Nuevo Usuario</h4>
+                        <div class="easypiechart" id="easypiechart-teal" data-percent="56"><span
+                                class="percent">56%</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-body easypiechart-panel">
+                        <h4>Soporte</h4>
+                        <div class="easypiechart" id="easypiechart-red" data-percent="27"><span
+                                class="percent">27%</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.row-->
 
-	{% else %}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default chat">
+                    <div class="panel-heading">
+                        Soporte En Vivo
+                        <ul class="pull-right panel-settings panel-button-tab-right">
+                            <li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <em class="fa fa-cogs"></em>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li>
+                                        <ul class="dropdown-settings">
+                                            <li><a href="#">
+                                                    <em class="fa fa-shopping-cart "></em> Venta #2936 <em
+                                                        class="fa fa-sm fa-bell color-red"></em>
+                                                </a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#">
+                                                    <em class="fa fa-shopping-cart"></em> Venta #3926
+                                                </a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#">
+                                                    <em class="fa fa-shopping-cart"></em> Venta #5623
+                                                </a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <span class="pull-right clickable panel-toggle panel-button-tab-left"><em
+                                class="fa fa-toggle-up"></em></span></div>
+                    <div class="panel-body">
+                        <ul>
+                            <li class="left clearfix"><span class="chat-img pull-left">
+                                    <img src="http://placehold.it/60/30a5ff/fff" alt="User Avatar" class="img-circle" />
+                                </span>
+                                <div class="chat-body clearfix">
+                                    <div class="header"><strong class="primary-font">Administrador</strong> <small
+                                            class="text-muted">32 mins ago</small></div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ante turpis,
+                                        rutrum ut ullamcorper sed, dapibus ac nunc.</p>
+                                </div>
+                            </li>
+                            <li class="right clearfix"><span class="chat-img pull-right">
+                                    <img src="http://placehold.it/60/dde0e6/5f6468" alt="User Avatar"
+                                        class="img-circle" />
+                                </span>
+                                <div class="chat-body clearfix">
+                                    <div class="header"><strong class="pull-left primary-font">Jaime</strong> <small
+                                            class="text-muted">24 mins ago</small></div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ante turpis,
+                                        rutrum ut ullamcorper sed, dapibus ac nunc.</p>
+                                </div>
+                            </li>
+                            <li class="left clearfix"><span class="chat-img pull-left">
+                                    <img src="http://placehold.it/60/30a5ff/fff" alt="User Avatar" class="img-circle" />
+                                </span>
+                                <div class="chat-body clearfix">
+                                    <div class="header"><strong class="primary-font">Administrador</strong> <small
+                                            class="text-muted">18 mins ago</small></div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ante turpis,
+                                        rutrum ut ullamcorper sed, dapibus ac nunc.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="input-group">
+                            <input id="btn-input" type="text" class="form-control input-md"
+                                placeholder="Escribe tu mensaje aquí..." /><span class="input-group-btn">
+                                <button class="btn btn-primary btn-md" id="btn-chat">Enviar</button>
+                            </span></div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Gestionar ventas
+                        <span class="pull-right clickable panel-toggle panel-button-tab-left"><em
+                                class="fa fa-toggle-up"></em></span></div>
+                    <div class="panel-body">
+                        <ul class="todo-list">
+                            <li class="todo-list-item">
+                                <div class="checkbox">
+                                    <label for="checkbox-1">Venta #2736</label>
+                                </div>
+                                <div class="pull-right action-buttons" style="margin-left: 3%; margin-right: 3%;"><a
+                                        href="#" class="power-off">
+                                        <em class="fa fa-power-off color-red"></em>
+                                    </a></div>
+                                <div class="pull-right action-buttons" style="margin-left: 3%; margin-right: 3%;"><a
+                                        href="#" class="cogs">
+                                        <em class="fa fa-cogs color-orange"></em>
+                                    </a></div>
+                                <div class="pull-right action-buttons" style="margin-left: 3%; margin-right: 3%;"><a
+                                        href="#" class="dashboard">
+                                        <em class="fa fa-dashboard"></em>
+                                    </a></div>
+                            </li>
+                            <li class="todo-list-item">
+                                <div class="checkbox">
+                                    <label for="checkbox-2">Venta #4836</label>
+                                </div>
+                                <div class="pull-right action-buttons" style="margin-left: 3%; margin-right: 3%;"><a
+                                        href="#" class="power-off">
+                                        <em class="fa fa-power-off color-red"></em>
+                                    </a></div>
+                                <div class="pull-right action-buttons" style="margin-left: 3%; margin-right: 3%;"><a
+                                        href="#" class="cogs">
+                                        <em class="fa fa-cogs color-orange"></em>
+                                    </a></div>
+                                <div class="pull-right action-buttons" style="margin-left: 3%; margin-right: 3%;"><a
+                                        href="#" class="dashboard">
+                                        <em class="fa fa-dashboard"></em>
+                                    </a></div>
+                            </li>
+                            <li class="todo-list-item">
+                                <div class="checkbox">
+                                    <label for="checkbox-3">Venta #4523</label>
+                                </div>
+                                <div class="pull-right action-buttons" style="margin-left: 3%; margin-right: 3%;"><a
+                                        href="#" class="power-off">
+                                        <em class="fa fa-power-off color-red"></em>
+                                    </a></div>
+                                <div class="pull-right action-buttons" style="margin-left: 3%; margin-right: 3%;"><a
+                                        href="#" class="cogs">
+                                        <em class="fa fa-cogs color-orange"></em>
+                                    </a></div>
+                                <div class="pull-right action-buttons" style="margin-left: 3%; margin-right: 3%;"><a
+                                        href="#" class="dashboard">
+                                        <em class="fa fa-dashboard"></em>
+                                    </a></div>
+                            </li>
+                            <li class="todo-list-item">
+                                <div class="checkbox">
+                                    <label for="checkbox-4">Venta #1253</label>
+                                </div>
+                                <div class="pull-right action-buttons" style="margin-left: 3%; margin-right: 3%;"><a
+                                        href="#" class="power-off">
+                                        <em class="fa fa-power-off color-red"></em>
+                                    </a></div>
+                                <div class="pull-right action-buttons" style="margin-left: 3%; margin-right: 3%;"><a
+                                        href="#" class="cogs">
+                                        <em class="fa fa-cogs color-orange"></em>
+                                    </a></div>
+                                <div class="pull-right action-buttons" style="margin-left: 3%; margin-right: 3%;"><a
+                                        href="#" class="dashboard">
+                                        <em class="fa fa-dashboard"></em>
+                                    </a></div>
+                            </li>
+                            <li class="todo-list-item">
+                                <div class="checkbox">
+                                    <label for="checkbox-5">Venta #6845</label>
+                                </div>
+                                <div class="pull-right action-buttons" style="margin-left: 3%; margin-right: 3%;"><a
+                                        href="#" class="power-off">
+                                        <em class="fa fa-power-off color-red"></em>
+                                    </a></div>
+                                <div class="pull-right action-buttons" style="margin-left: 3%; margin-right: 3%;"><a
+                                        href="#" class="cogs">
+                                        <em class="fa fa-cogs color-orange"></em>
+                                    </a></div>
+                                <div class="pull-right action-buttons" style="margin-left: 3%; margin-right: 3%;"><a
+                                        href="#" class="dashboard">
+                                        <em class="fa fa-dashboard"></em>
+                                    </a></div>
+                            </li>
+                            <li class="todo-list-item">
+                                <div class="checkbox">
+                                    <label for="checkbox-6">Venta #4504</label>
+                                </div>
+                                <div class="pull-right action-buttons" style="margin-left: 3%; margin-right: 3%;"><a
+                                        href="#" class="power-off">
+                                        <em class="fa fa-power-off color-red"></em>
+                                    </a></div>
+                                <div class="pull-right action-buttons" style="margin-left: 3%; margin-right: 3%;"><a
+                                        href="#" class="cogs">
+                                        <em class="fa fa-cogs color-orange"></em>
+                                    </a></div>
+                                <div class="pull-right action-buttons" style="margin-left: 3%; margin-right: 3%;"><a
+                                        href="#" class="dashboard">
+                                        <em class="fa fa-dashboard"></em>
+                                    </a></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--/.col-->
 
-		{% if request.user.tipo_usuario == 'interno' %}
 
-		    <h1 style="color: white;">Bienvenido, cliente interno {{ request.user.username }}</h1>
-		    <h2 style="color: white;">Ver lista de productos</h2>
-			<a href="{% url 'sistema:listaprod' %}" class="btn btn-primary" id="productos">Revisar</a>
-
-		{% else %}
-	
-			{% if request.user.tipo_usuario == 'externo' %}
-
-			    <h1 style="color: white;">Bienvenido, cliente externo {{ request.user.username }}</h1>
-			    <h2 style="color: white;">Ver lista de productos</h2>
-				<a href="{% url 'sistema:listaprod' %}" class="btn btn-primary" id="productos">Revisar</a>
-
-			{% else %}
-	
-				{% if request.user.tipo_usuario == 'consultor' %}
-
-				    <h1 style="color: white;">Bienvenido, consultor {{ request.user.username }}</h1>
-
-				{% else %}
-	
-					{% if request.user.tipo_usuario == 'transportista' %}
-
-					    <h1 style="color: white;">Bienvenido, transportista {{ request.user.username }}</h1>
-					    <h2 style="color: white;">Publicar mis transportes</h2>
-					    <a href="" class="btn btn-primary" id="productos">Transportes</a>
-
-					{% endif %}
-				{% endif %}
-			{% endif %}
-		{% endif %}
-	{% endif %}
+            <div class="col-md-6">
+                <div class="panel panel-default ">
+                    <div class="panel-heading">
+                        Resumen Estado
+                        <ul class="pull-right panel-settings panel-button-tab-right">
+                            <li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <em class="fa fa-cogs"></em>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li>
+                                        <ul class="dropdown-settings">
+                                            <li><a href="#">
+                                                    <em class="fa fa-shopping-cart"></em> Venta #2936 <em
+                                                        class="fa fa-sm fa-bell color-red"></em>
+                                                </a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#">
+                                                    <em class="fa fa-shopping-cart"></em> Venta #3926
+                                                </a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#">
+                                                    <em class="fa fa-shopping-cart"></em> Venta #5623
+                                                </a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <span class="pull-right clickable panel-toggle panel-button-tab-left"><em
+                                class="fa fa-toggle-up"></em></span></div>
+                    <div class="panel-body timeline-container">
+                        <ul class="timeline">
+                            <li>
+                                <div class="timeline-badge"><em class="glyphicon glyphicon-pushpin"></em></div>
+                                <div class="timeline-panel">
+                                    <div class="timeline-heading">
+                                        <h4 class="timeline-title">Solicitud Venta</h4>
+                                    </div>
+                                    <div class="timeline-body">
+                                        <p>La venta esta en preparación para su desarrollo. En esta etapa se designan
+                                            los usuarios involucrados para la venta.</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="timeline-badge primary"><em class="glyphicon glyphicon-link"></em></div>
+                                <div class="timeline-panel">
+                                    <div class="timeline-heading">
+                                        <h4 class="timeline-title">En Desarrollo</h4>
+                                    </div>
+                                    <div class="timeline-body">
+                                        <p>El pedido del cliente es preparado y despachado al destino.</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="timeline-badge"><em class="glyphicon glyphicon-camera"></em></div>
+                                <div class="timeline-panel">
+                                    <div class="timeline-heading">
+                                        <h4 class="timeline-title">Confirmación</h4>
+                                    </div>
+                                    <div class="timeline-body">
+                                        <p>El cliente confirma el pedido y se procede a realizar el pago de la venta.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="timeline-badge"><em class="glyphicon glyphicon-paperclip"></em></div>
+                                <div class="timeline-panel">
+                                    <div class="timeline-heading">
+                                        <h4 class="timeline-title">Cierre</h4>
+                                    </div>
+                                    <div class="timeline-body">
+                                        <p>El administrador confirma el estado de la venta y procede al cierre.</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--/.col-->
+            <div class="col-sm-12">
+                <p class="back-link">Repositorio <a href="https://www.medialoot.com">GitHub</a></p>
+            </div>
+        </div>
+        <!--/.row-->
+    </div>
+    <!--/.main-->
+    
 {% endif %}
-
 
 {% endblock %}
 

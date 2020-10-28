@@ -1,0 +1,80 @@
+{% extends 'base/base_logeado.html' %}
+
+{% block content %}
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="#">
+                        <em class="fa fa-home"></em>
+                    </a></li>
+                <li class="active">Ofertar transporte</li>
+            </ol>
+        </div>
+        <!--/.row-->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Ofrecer mis transportes</h1>
+            </div>
+        </div>
+        <!--/.row-->
+        <div class="panel panel-default">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab1">
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>Tipo</th>
+			<th>Fecha Solicitada</th>
+			<th>Descripcion</th>
+			<th>Usuario</th>
+			<th>Accion</th>
+		</tr>
+	</thead>
+
+	<tbody>
+
+{% load static %}
+
+		{% if pedidos %}
+		{% for pedido in pedidos %}
+			{% if pedido.estado_admin == True and pedido.estado_productor == True and pedido.productos_id_prod != null %}
+
+				<tr>
+					<td><center>{{ pedido.tipo }}</center></td>
+					<td><center>{{ pedido.fecha }}</center></td>
+					<td><center>{{ pedido.descrip }}</center></td>
+					<td><center>{{ pedido.usuarios_usuarios_id_user.username }}</center></td>
+					<td> 
+						<center>
+							<a class="btn btn-primary" href="{% url 'sistema:ofrecertrans' pedido.id_ped %}">Ofertar</a>
+						</center>
+					</td>
+				</tr>
+
+			{% endif %}
+
+		{% endfor %}
+		{% else %}
+
+			<h1>No hay solicitudes</h1>
+
+		{% endif %}
+
+	</tbody>
+
+</table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            	<!--/.panel-->
+        </div>
+            <!--/.col-->
+    </div>   
+    	<!--/.main-->
+{% endblock %}

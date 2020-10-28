@@ -2,47 +2,71 @@
 
 {% block content %}
 
-<table class="table table-bordered" style="margin-left: 5%;margin-right: 5%; width: 90%;">
-	<thead>
-		<tr>
-			<td style="color: white;"><center>Nombre producto</center></td>
-			<td style="color: white;"><center>Precio producto</center></td>
-			<td style="color: white;"><center>Stock</center></td>
-			<td style="color: white;"><center>Vendedor</center></td>
-		</tr>
-	</thead>
-
-	<tbody>
 
 
-<div align="center">
-	<h1 style="color: white;"> LISTA DE PRODUCTOS</h1>
-</div>
 
-{% load static %}
 
-		{% if productos and usuarios %}
-		{% for producto in productos %}
-			
-		<tr>
-			<td style="color: white;"><center>{{ producto.nom_prod }}</center></td>
-			<td style="color: white;"><center>{{ producto.precio_prod }}</center></td>
-			<td style="color: white;"><center>{{ producto.stock_prod }}</center></td>
 
-			<td style="color: white;"><center>{{ producto.usuarios_usuarios_id_user.username }}</center></td>
 
-		</tr>
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 
-		{% endfor %}
-		{% else %}
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="#">
+                        <em class="fa fa-home"></em>
+                    </a></li>
+                <li class="active">Lista de productos</li>
+            </ol>
+        </div>
+        <!--/.row-->
 
-		<h1>No hay productos</h1>
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Lista de productos</h1>
+            </div>
+        </div>
+        <!--/.row-->
+        <div class="panel panel-default">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab1">
+							<table class="table table-bordered" >
+								<thead>
+									<tr>
+										<th>Nombre Producto</th>
+										<th>Precio Producto</th>
+										<th>Stock</th>
+										<th>Vendedor</th>
+									</tr>
+								</thead>
 
-		{% endif %}
+								<tbody>
+									{% load static %}
+									{% if productos and usuarios %}
+										{% for producto in productos %}
+											<tr>
+												<td >{{ producto.nom_prod }}</td>
+												<td >{{ producto.precio_prod }}</td>
+												<td >{{ producto.stock_prod }}</td>
+												<td >{{ producto.usuarios_usuarios_id_user.username }}</td>
+											</tr>
+										{% endfor %}
+									{% else %}
+									<h1>No hay productos</h1>
+									{% endif %}
+								</tbody>
+							</table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            	<!--/.panel-->
+        </div>
+            <!--/.col-->
+    </div>   
+    	<!--/.main-->
 
-	</tbody>
-
-</table>
 
 
 {% endblock %}

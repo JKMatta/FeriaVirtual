@@ -1,0 +1,147 @@
+* {
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+/* LETRAS DEL CUERPO */
+body {
+    margin: 0;
+    font-family: montserratt;
+}
+
+/* COLOR Y TAMAÑO NAV CABECERA */
+.barra {
+    background: #eee;
+    height: 80px;
+    width: 100%;
+}
+
+/* DETALLES TITULO LOGO (MAIPO GRANDE) 
+label.logo {
+    color: #636363;
+    font-size: 35px;
+    line-height: 80px;
+    padding: 0 100px;
+    font-weight: bold;
+}
+
+#logo h1 label span {
+    color: #5bd850;
+}
+
+#logo h1 label {
+    color: #222222;
+    line-height: 1;
+    display: inline-block;
+    margin-left: 30px;
+}
+*/
+
+.maipo {
+    color: #222222;
+    font-size: 30px;
+    margin-left: 30px;
+    margin-top: 10px;
+}
+
+.grande {
+    color: #5bd850;
+}
+
+
+/* UBICACION DE LA LISTA UL */ 
+.barra ul {
+    float: right;
+    margin-right: 20px;
+}
+
+/* DETALLES LISTA LI Y UBICACION EN LINEA DEL NAV EN CABECERA*/
+.barra ul li {
+    display: inline-block;
+    line-height: 60px; /* cambiar 60*/
+    margin: 0 5px;
+}
+
+/* DETALLES HIPERVINCULOS DE LISTAS */
+.barra ul li a {
+    color: #0f0f0f;
+    font-size: 17px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+/* INTERACCION CON LOS ELEMENTOS DE LA LISTA */
+a.active, a:hover {
+    background: #98da92;
+    transition: .5s;
+}
+
+/* CLASS PARA DETALLES DEL ICONO DE BARRA DE MENU*/
+.checkbtn {
+    font-size: 30px;
+    color: #636363;
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+}
+
+/* ID CHECKBOX PARA QUE QUEDE "INVISIBLE" */
+#check {
+    display: none;
+}
+
+/* APLICAR DIFERENTES ESTILOS EN BASE A UNA CONSULTA (TAMAÑO) */
+@media screen and (max-width: 952px) {
+    .barra.label.logo {
+        font-size: 30px;
+        padding-left: 50px;
+    }
+
+    .barra ul li a{
+        font-size: 16px;
+    }
+}
+
+/* APLICAR DIFERENTES ESTILOS EN BASE A UNA CONSULTA (TAMAÑO) */
+@media screen and (max-width: 858px) {
+    
+    .checkbtn {
+        display: block;
+    }
+
+    .barra ul {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: #4fc777;
+        top: 80px;
+        left: -100%;
+        text-align: center;
+        transition: all .5s;
+    }
+
+    .barra ul li {
+        display: block;
+        margin: 50px 0;
+        line-height: 30px;
+    }
+
+    .barra ul li a {
+        font-size: 20px;
+    }
+
+    a:hover, a.active {
+        background: none;
+        color: #0082e6;
+    }
+
+    #check:checked ~ ul {
+        left: 0;
+    }
+}

@@ -1,0 +1,66 @@
+/*  ASIDE  */
+
+aside {
+    padding: 15px;
+    float: right;
+    font-style: Helvetica;
+    border-radius: 20px;
+}
+
+/* DETALLES HIPERVINCULOS DE LISTAS */
+.menu ul li a {
+    color: white;
+    font-size: 15px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.opciones {
+    font-size: 30px;
+    background:#5bd850;
+}
+
+.opciones h3 {
+    text-align: center;
+    font-size: 30px;
+    margin: auto;
+    margin-right: 15px;
+    background: #eee;
+    border-radius: 10px;
+}
+
+.opciones h5 {
+    font-size: x-large;
+    text-align: center;
+}
+
+/*  Tablas  */
+
+.table {
+    margin-left: 5%;
+    margin-right: 5%; 
+    width: 90%;
+}
+
+thead{
+    font-size: 18px;
+    color: #5bd850;   
+    text-align: center;
+}
+
+tbody {
+    font-size: 14px;
+    color: black;
+    text-align: center;
+}
+
+table th {
+    background-color: #212220;
+}
+
+table td {
+    background-color: #eee;
+}

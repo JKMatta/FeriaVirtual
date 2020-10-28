@@ -1,0 +1,146 @@
+{% extends 'base/base_logeado.html' %}
+
+
+
+
+{% block content %}
+
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="#">
+                        <em class="fa fa-home"></em>
+                    </a></li>
+                <li class="active">Ofertar</li>
+            </ol>
+        </div>
+        <!--/.row-->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Ofrecer mi transporte</h1>
+            </div>
+        </div>
+        <!--/.row-->
+        <div class="panel panel-default">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab1">
+							<br>
+							<center>
+									<form method="POST">
+										{% csrf_token %}
+								        <div class="panel panel-default">
+								            <div class="panel-heading"><h5>Producto a transportar</h5></div>
+								            <div class="row" style="padding: 1%; margin-left: 1%; margin-right: 1%;">
+								                <div class="col-md-3">
+								                    <div class="row">
+								                        <h4 style="padding-left: 3%; margin: 0%;">Tipo de producto</h4>
+								                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+								                            <input class="form-control" type="text" name="first_name" value="{{ PedidoSelec.tipo }}" maxlength="100" required="" id="id_first_name" disabled>
+								                        </div>
+								                    </div>
+								                </div>
+								                <div class="col-md-3">
+								                    <div class="row">
+								                        <h4 style="padding-left: 3%; margin: 0%;">Fecha solicitado</h4>
+								                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+								                            <input class="form-control" type="text" name="last_name" value="{{ PedidoSelec.fecha }}" maxlength="100" required="" id="id_last_name" disabled>
+								                        </div>
+								                    </div>
+								                </div>
+								                <div class="col-md-3">
+								                    <div class="row">
+								                        <h4 style="padding-left: 3%; margin: 0%;">Nombre del cliente</h4>
+								                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+								                            <input class="form-control" type="email" name="email" value="{{ PedidoSelec.usuarios_usuarios_id_user.first_name }} {{ PedidoSelec.usuarios_usuarios_id_user.last_name }}" maxlength="254" required="" id="id_email" disabled>
+								                        </div>
+								                    </div>
+								                </div>
+								                <div class="col-md-3">
+								                    <div class="row">
+								                        <h4 style="padding-left: 3%; margin: 0%;">Nombre del productor</h4>
+								                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+								                            <input class="form-control" type="text" name="username" value="{{ PedidoSelec.productos_id_prod.usuarios_usuarios_id_user.first_name }} {{ PedidoSelec.productos_id_prod.usuarios_usuarios_id_user.last_name }}" maxlength="50" required="" id="id_username" disabled>
+								                        </div>
+								                    </div>
+								                </div>
+								            </div>
+								        </div>
+
+								        <div class="panel panel-default">
+								            <div class="panel-heading"><h5>Mi oferta de transporte</h5></div>
+								            <div class="row" style="padding: 1%; margin-left: 1%; margin-right: 1%;">
+								                <div class="col-md-3">
+								                    <div class="row">
+								                        <h4 style="padding-left: 3%; margin: 0%;">Mis transportes</h4>
+								                        <div class="form-group" style="margin-top: 1%; margin-left: 3%; margin-right: 3%;">
+								                            {% if transportes %}
+															<select class="form-control" name="transporte_id_trans" id="id_transporte_id_trans">
+															  	<option value="" selected="">---------</option>
+															  	{% for transporte in transportes %}
+																	{% if transporte.usuarios_usuarios_id_user.id_user == request.user.id_user %}
+															  			<option value="{{ transporte.id_trans }}">{{ transporte.tip_transporte }} con capacidad de {{ transporte.capacidad_trans }}</option>
+															  		{% endif %}
+																{% endfor %}
+															{% else %}
+																<h1>No hay transportes </h1>
+															{% endif %}
+
+															</select>
+								                        </div>
+								                    </div>
+								                </div>
+								            </div>
+								        </div>
+
+
+								        <div style="display: none;">
+								        	<input type="text" name="pedido_id_ped" class="form-control col-10" required="" id="id_pedido_id_ped" value=" {{ PedidoSelec.id_ped }}" style="display: none;">
+								        </div>
+
+
+										<br>
+										<button class="btn btn-primary" type="submit">Ofertar transporte</button>
+									</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+								</div>
+
+							</center>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <!--/.panel-->
+        </div>
+            <!--/.col-->
+    </div>   
+        <!--/.main-->
+{% endblock %}
