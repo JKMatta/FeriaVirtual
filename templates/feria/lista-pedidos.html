@@ -48,13 +48,13 @@
 							{% load static %}
 
 									{% if pedidos%}
-									{% for pedido in pedidos %}
+									{% for p in pedido %}
 										
 									<tr>
-										<td><center>{{ pedido.tipo }}</center></td>
-										<td><center>{{ pedido.fecha }}</center></td>
-										<td><center>{{ pedido.descrip }}</center></td>
-										<td><center>{{ pedido.usuarios_usuarios_id_user.username }}</center></td>
+										<td><center>{{ p.0 }}</center></td>
+										<td><center>{{ p.1 }}</center></td>
+										<td><center>{{ p.2 }}</center></td>
+										<td><center>{{ p.3 }}</center></td>
 									{% if pedido.estado_admin == False %}
 										<td><center>En proceso</center></td>
 									{% else %}

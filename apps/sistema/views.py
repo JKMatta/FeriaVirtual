@@ -10,6 +10,8 @@ from apps.sistema.forms import RegistroDeProductos,NuevoContrato,editContrato,Re
 from apps.sistema.forms import ResponderOferta,OfrecerTransport,ResponderTransporte,SolicitarSeguimiento,EditarSeguimiento
 from apps.sistema.models import Productos, Contratos, Pedido,ProcesPedido, Transporte, Seguimiento
 from django.contrib.auth.forms import UserChangeForm
+from django.db import connection
+import cx_Oracle
 # Create your views here.
 
 
@@ -67,16 +69,32 @@ def registrarproductos(request):
 	return render(request, 'feria/productor/registro-productos.html',context )
 
 
-
-
+#-----------------------------------------------------------------------------
 @login_required
 def listar_productos(request):
-	producto = Productos.objects.all()
-	usuario = usuarios.objects.all()
-	contexto = {'productos':producto,'usuarios':usuario}
-	return render(request,'feria/lista-productos.html',contexto)
+	data = {
+		'productos':list_product()
+	}
 
+	#producto = Productos.objects.all()
+	#usuario = usuarios.objects.all()
+	#contexto = {'productos':producto,'usuarios':usuario}
+	return render(request,'feria/lista-productos.html', data)
 
+def list_product():
+	django_cursor = connection.cursor() 
+	cursor = django_cursor.connection.cursor()
+	#este cursor nos permite conectarnos directamente con oracle y asi llamar a los procedure
+	out_cur = django_cursor.connection.cursor()
+	#out_cur viene con un cursor nativo que hay que recorrer
+	cursor.callproc("SP_LISTAR_PRODUCTOS", [out_cur])
+
+	lista = []
+	for fila in out_cur:
+		lista.append(fila)
+
+	return lista
+#--------------------------------------------------------------------------
 
 
 @login_required
@@ -135,14 +153,31 @@ def solicitarpedido(request):
 	return render(request, 'feria/cliente/solicitar-pedido.html',context )
 
 
-
-
+#-------------------------------------------------------------
 @login_required
 def listar_pedidos(request):
-	pedido = Pedido.objects.all()
-	contexto = {'pedidos':pedido}
-	return render(request,'feria/lista-pedidos.html',contexto)
+	data = {
+		'pedido':list_pedid()
+	}
+	
+	#pedido = Pedido.objects.all()
+	#contexto = {'pedidos':pedido}
+	return render(request,'feria/lista-pedidos.html',data)
 
+def list_pedid():
+	django_cursor = connection.cursor() 
+	cursor = django_cursor.connection.cursor()
+	#este cursor nos permite conectarnos directamente con oracle y asi llamar a los procedure
+	out_cur = django_cursor.connection.cursor()
+	#out_cur viene con un cursor nativo que hay que recorrer
+	cursor.callproc("SP_LISTAR_PEDIDOS", [out_cur])
+
+	lista = []
+	for fila in out_cur:
+		lista.append(fila)
+
+	return lista
+#-----------------------------------------------------------
 
 
 
@@ -160,15 +195,30 @@ def AdministrarPedido(request, id_ped):
 	return render(request, 'feria/administrador/administrar-pedido.html', args)
 
 
-
-
+#---------------------------------------------------------------
 @login_required
 def lista_ofrecer(request):
-	pedido = Pedido.objects.all()
-	contexto = {'pedidos':pedido}
-	return render(request,'feria/productor/lista-ofrecer.html',contexto)
+	data = {
+		'pedido':list_ofrecer()
+	}
+	#pedido = Pedido.objects.all()
+	#contexto = {'pedidos':pedido}
+	return render(request,'feria/productor/lista-ofrecer.html',data)
 
+def list_ofrecer():
+	django_cursor = connection.cursor() 
+	cursor = django_cursor.connection.cursor()
+	#este cursor nos permite conectarnos directamente con oracle y asi llamar a los procedure
+	out_cur = django_cursor.connection.cursor()
+	#out_cur viene con un cursor nativo que hay que recorrer (se rehusa un procedur ya que llama las mismas columnas)
+	cursor.callproc("SP_LISTAR_PEDIDOS", [out_cur])
 
+	lista = []
+	for fila in out_cur:
+		lista.append(fila)
+
+	return lista
+#---------------------------------------------------------------------
 
 
 @login_required
