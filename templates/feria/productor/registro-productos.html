@@ -25,23 +25,26 @@
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="tab1">
                             <center>
-                            	<form method="post">
-                                {% csrf_token %}
-                                <h2 >Nombre</h2>
-                                {{ form.nom_prod }}
+                                <form action="" method="POST">
+                                    {% csrf_token %}
 
-                                <h2 >Precio(unidad)</h2>
-                                {{ form.precio_prod }}
+                                    <label for=""> Nombre </label>
+                                    <input type="text" name="nombre" id="nombre">
+                                    <br>
+                                    <label for=""> Precio </label>
+                                    <input type="number" name="precio" id="precio">
+                                    <br>
+                                    <label for=""> Descripcion </label>
+                                    <input type="text" name="descripcion" id="descripcion">
+                                    <br>
+                                    <label for=""> Stock </label>
+                                    <input type="number" name="stock" id="stock">
+                                    <br>
 
-                                <h2 >Stock(Kg)</h2>
-                                {{ form.stock_prod }}
-
-                                <h2 >Descripcion</h2>
-                                {{ form.desc_prod }}
-                                <input type="text" name="usuarios_usuarios_id_user" class="form-control" required="" id="id_usuarios_usuarios_id_user" value="{{ request.user.id_user }}" style="display: none;">
-                                <br>
-                                <input class="btn btn-primary" type="submit" value="Agregar">
-                            </form>
+                                    <input type="text" name="usuarios_usuarios_id_user" class="form-control" required="" id="id_usuarios_usuarios_id_user" value="{{ request.user.id_user }}" style="display: none;">
+                                    <input class="btn btn-primary" type="submit" value="Agregar">
+                                </form>
+                                {{mensaje}}
                             </center>
                         </div>
                     </div>
@@ -53,3 +56,28 @@
     </div>   
         <!--/.main-->
 {% endblock %}
+
+
+
+
+                            	<!-- -->
+
+<!--
+                                    <form method="POST">
+                                    {% csrf_token %}
+                                    <h2 >Nombre</h2>
+                                    {{ form.nom_prod }}
+    
+                                    <h2 >Precio(unidad)</h2>
+                                    {{ form.precio_prod }}
+    
+                                    <h2 >Stock(Kg)</h2>
+                                    {{ form.stock_prod }}
+    
+                                    <h2 >Descripcion</h2>
+                                    {{ form.desc_prod }}
+                                    <input type="text" name="usuarios_usuarios_id_user" class="form-control" required="" id="id_usuarios_usuarios_id_user" value="{{ request.user.id_user }}" style="display: none;">
+                                    <br>
+                                    <input class="btn btn-primary" type="submit" value="Agregar">
+                                </form>
+-->

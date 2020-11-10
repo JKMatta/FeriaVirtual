@@ -10,6 +10,8 @@ from apps.sistema.forms import RegistroDeProductos,NuevoContrato,editContrato,Re
 from apps.sistema.forms import ResponderOferta,OfrecerTransport,ResponderTransporte,SolicitarSeguimiento,EditarSeguimiento
 from apps.sistema.models import Productos, Contratos, Pedido,ProcesPedido, Transporte, Seguimiento
 from django.contrib.auth.forms import UserChangeForm
+from django.db import connection
+import cx_Oracle
 # Create your views here.
 
 
@@ -51,32 +53,67 @@ def User_edit(request, id_user):
 	return render(request, 'feria/administrador/editar-usuarios.html', args)
 
 
-
-
+#---------------------------------------------------------------------
 @login_required
 def registrarproductos(request):
-	form = RegistroDeProductos(request.POST, request.FILES or None)
-	if form.is_valid():
-		form.save()
-		return redirect('sistema:index')
-	else:
-		form = RegistroDeProductos()
-	context = {
-		'form': form,
+	data = {
+		'productos':listado_productos(),
 	}
-	return render(request, 'feria/productor/registro-productos.html',context )
+	if request.method == 'POST':
+		nom_prod = request.POST.get('nombre')
+		precio_prod = request.POST.get('precio')
+		desc_prod = request.POST.get('descripcion')
+		stock_prod = request.POST.get('stock')
+		usuarios_usuarios_id_user = request.POST.get('usuarios_usuarios_id_user')
+		salida = agregar_productos(nom_prod, precio_prod, desc_prod, stock_prod, usuarios_usuarios_id_user)
+		if salida == 1:
+			data['mensaje'] = 'agregado'
+		else:
+			data['mensaje'] = 'no agregado'
+	#form = RegistroDeProductos(request.POST, request.FILES or None)
+	#if form.is_valid():
+	#	form.save()
+	#	return redirect('sistema:index')
+	#else:
+	#	form = RegistroDeProductos()
+	#context = {
+	#	'form': form,
+	#}
+	return render(request, 'feria/productor/registro-productos.html', data)
 
+def agregar_productos(nom_prod, precio_prod, desc_prod, stock_prod, usuarios_usuarios_id_user):
+	django_cursor = connection.cursor()
+	cursor = django_cursor.connection.cursor()
+	salida = cursor.var(cx_Oracle.NUMBER)
 
+	cursor.callproc('SP_AGREGAR_PRODUCTOS', [nom_prod, precio_prod, desc_prod, stock_prod, usuarios_usuarios_id_user, salida])
+	return salida.getvalue()
 
-
+#---------------------------------------------------------------------
 @login_required
 def listar_productos(request):
-	producto = Productos.objects.all()
-	usuario = usuarios.objects.all()
-	contexto = {'productos':producto,'usuarios':usuario}
-	return render(request,'feria/lista-productos.html',contexto)
+	data = {
+		'productos':listado_productos(),
+	}
+	#producto = Productos.objects.all()
+	#usuario = usuarios.objects.all()
+	#contexto = {'productos':producto,'usuarios':usuario}
+	return render(request,'feria/lista-productos.html',data)
 
+def listado_productos():
+	django_cursor = connection.cursor()
+	cursor = django_cursor.connection.cursor()
+	out_cur = django_cursor.connection.cursor()
 
+	cursor.callproc("SP_LISTAR_PRODUCTOS", [out_cur])
+
+	lista = []
+
+	for fila in out_cur:
+		lista.append(fila)
+	
+	return lista
+#---------------------------------------------------------------------
 
 
 @login_required
@@ -135,15 +172,30 @@ def solicitarpedido(request):
 	return render(request, 'feria/cliente/solicitar-pedido.html',context )
 
 
-
-
+#-------------------------------------------------------------------
 @login_required
 def listar_pedidos(request):
+	#data = {
+	#	'pedidos':listado_pedido(),
+	#}
 	pedido = Pedido.objects.all()
 	contexto = {'pedidos':pedido}
 	return render(request,'feria/lista-pedidos.html',contexto)
 
+def listado_pedido():
+	django_cursor = connection.cursor()
+	cursor = django_cursor.connection.cursor()
+	out_cur = django_cursor.connection.cursor()
 
+	cursor.callproc("SP_LISTAR_PEDIDOS", [out_cur])
+
+	lista = []
+
+	for fila in out_cur:
+		lista.append(fila)
+	
+	return lista
+#--------------------------------------------------------------------
 
 
 @login_required

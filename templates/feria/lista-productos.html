@@ -43,13 +43,13 @@
 
 								<tbody>
 									{% load static %}
-									{% if productos and usuarios %}
-										{% for producto in productos %}
+									{% if productos %}
+										{% for p in productos %}
 											<tr>
-												<td >{{ producto.nom_prod }}</td>
-												<td >{{ producto.precio_prod }}</td>
-												<td >{{ producto.stock_prod }}</td>
-												<td >{{ producto.usuarios_usuarios_id_user.username }}</td>
+												<td >{{ p.0 }}</td>
+												<td >{{ p.1 }}</td>
+												<td >{{ p.2 }}</td>
+												<td >{{ p.3 }}</td>
 											</tr>
 										{% endfor %}
 									{% else %}
